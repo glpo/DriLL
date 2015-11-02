@@ -16,7 +16,7 @@
     -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-    <context:component-scan base-package="com.angl.drill">
+    <context:component-scan base-package="com.angl.drill.mvc">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
