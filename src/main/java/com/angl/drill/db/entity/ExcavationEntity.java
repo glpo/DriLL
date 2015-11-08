@@ -29,11 +29,5 @@ public class ExcavationEntity {
         return time;
     }
 
-    public void setExcavation(Integer excavation) {
-        this.excavation = excavation;
-    }
 
-    public void setTime(Integer time) {
-        this.time = time;
-    }
 }
