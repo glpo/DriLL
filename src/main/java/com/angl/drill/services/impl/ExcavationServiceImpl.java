@@ -6,10 +6,12 @@ import com.angl.drill.services.BaseService;
 import com.angl.drill.services.ExcavationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ExcavationServiceImpl extends BaseService<ExcavationEntity> implements ExcavationService {
     @Autowired
     private ExcavationDAO excavationDAO;
