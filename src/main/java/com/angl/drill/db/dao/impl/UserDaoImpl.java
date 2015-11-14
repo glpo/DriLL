@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public class UserDaoImpl extends BaseDao<UserEntity> implements UserDAO {
 
-
-
+    public UserDaoImpl() {
+        super(UserEntity.class);
+    }
 }

@@ -10,23 +10,27 @@ public class ExcavationEntity {
     @Id
     private String id;
 
-    private Integer excavation;
     private Integer time;
+    private Integer exc;
 
     public ExcavationEntity() {
     }
 
     public ExcavationEntity(Integer excavation, Integer time) {
-        this.excavation = excavation;
+        this.exc = excavation;
         this.time = time;
     }
 
-    public Integer getExcavation() {
-        return excavation;
+    public Integer getExc() {
+        return exc;
     }
 
     public Integer getTime() {
         return time;
+    }
+
+    public String getId() {
+        return id;
     }
 
 

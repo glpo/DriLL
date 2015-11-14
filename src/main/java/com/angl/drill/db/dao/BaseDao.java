@@ -15,6 +15,10 @@ public abstract class BaseDao<T> {
 
     private Class<T> clazz;
 
+    public BaseDao(Class<T> entityClass) {
+        this.clazz = entityClass;
+    }
+
     public void save(T entity) {
         mongoOperations.save(entity);
     }

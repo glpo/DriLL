@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ConstantsDaoImpl extends BaseDao<ConstantsEntity> implements ConstantsDAO {
 
+    public ConstantsDaoImpl() {
+        super(ConstantsEntity.class);
+    }
 }
