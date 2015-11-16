@@ -9,16 +9,19 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <mvc:annotation-driven/>
-
-    <!--
-    все файлы из папки webapp/resources/ будут доступны по адресу: localhost/resources/
-    -->
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
-
     <context:component-scan base-package="com.angl.drill.mvc">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
+
+    <mvc:annotation-driven/>
+
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/view/resources/**" location="/resources/" />
+    <mvc:resources mapping="/drill/resources/**" location="/resources/" />
+    <!--<mvc:resources mapping="/admin/resources/**" location="/resources/" />
+    <mvc:resources mapping="/includes/resources/**" location="/resources/" />
+    <mvc:resources mapping="/customers/resources/**" location="/resources/" /> -->
+    <mvc:view-controller path="/" view-name="login" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/view/"/>
