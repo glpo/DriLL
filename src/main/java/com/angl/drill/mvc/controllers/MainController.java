@@ -21,15 +21,10 @@ public class MainController {
 
     private UserEntity userEntity;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String getStartPage(){
-        return "index";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+   @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String init(ModelMap map){
-        userEntity = new UserEntity();
-        map.put("user", userEntity);
+        ///userEntity = new UserEntity();
+        //map.put("user", userEntity);
 
         return "login";
     }

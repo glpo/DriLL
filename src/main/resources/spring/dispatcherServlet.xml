@@ -14,14 +14,14 @@
     </context:component-scan>
 
     <mvc:annotation-driven/>
+    <mvc:view-controller path="/" view-name="login" />
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:resources mapping="/view/resources/**" location="/resources/" />
     <mvc:resources mapping="/drill/resources/**" location="/resources/" />
     <!--<mvc:resources mapping="/admin/resources/**" location="/resources/" />
     <mvc:resources mapping="/includes/resources/**" location="/resources/" />
-    <mvc:resources mapping="/customers/resources/**" location="/resources/" />
-    <mvc:view-controller path="/" view-name="login" /> -->
+    <mvc:resources mapping="/customers/resources/**" location="/resources/" /> -->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/view/"/>
