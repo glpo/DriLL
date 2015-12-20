@@ -30,10 +30,11 @@ public class MainController {
     }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public ModelAndView getDashboard(){
-        ModelAndView modelAndView = new ModelAndView("dashboard");
-        modelAndView.addObject("excavation", excavationService.getAll());
+    public String getDashboard(){
+        //ModelAndView modelAndView = new ModelAndView("dashboard");
+        //modelAndView.addObject("excavation", excavationService.getAll());
 
-        return modelAndView;
+        //return modelAndView;
+        return "/dashboard/dashboard";
     }
 }

@@ -17,6 +17,8 @@
     <mvc:view-controller path="/" view-name="login" />
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/routing/resources/**" location="/resources/" />
+    <mvc:resources mapping="/params/resources/**" location="/resources/" />
     <mvc:resources mapping="/view/resources/**" location="/resources/" />
     <mvc:resources mapping="/drill/resources/**" location="/resources/" />
     <!--<mvc:resources mapping="/admin/resources/**" location="/resources/" />

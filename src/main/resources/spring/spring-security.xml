@@ -9,6 +9,7 @@
     <http use-expressions="true">
         <intercept-url pattern="/login" access="isAnonymous()" />
         <intercept-url pattern="/dashboard/**" access="isAuthenticated()" />
+        <intercept-url pattern="/routing/**" access="isAuthenticated()" />
         <intercept-url pattern="/excavation/**" access="hasRole('ROLE_USER')" />
 
 
