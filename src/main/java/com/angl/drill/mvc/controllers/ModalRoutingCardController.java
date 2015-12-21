@@ -4,12 +4,17 @@ import com.angl.drill.db.entity.ModalRoutingCardEntity;
 import com.angl.drill.services.ModalRoutingCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/routing")
@@ -37,6 +42,49 @@ public class ModalRoutingCardController {
         entity.set
         entity.set*/
 
-        return new ModelAndView("/routing/routing_card", "routingCards", entity);
+        return new ModelAndView("/routing/routing_card", "card", entity);
+    }
+
+    @RequestMapping(value = "/allCards", method = RequestMethod.GET)
+    public ModelAndView getAllRoutingCards() {
+        //List<ModalRoutingCardEntity> routingCards = modalRoutingCardService.getAll();
+        List<ModalRoutingCardEntity> routingCards = new ArrayList<ModalRoutingCardEntity>();
+
+        ModalRoutingCardEntity card = new ModalRoutingCardEntity();
+        card.setName("Routing Card #1 loollffooolo 324423 asdada");
+
+        ModalRoutingCardEntity card1 = new ModalRoutingCardEntity();
+        card.setName("Routing Card #2 ffgfdgdgdww 324423 asdada");
+
+        ModalRoutingCardEntity card2 = new ModalRoutingCardEntity();
+        card.setName("Routing Card #3 bnvnvbnvbnv 324423 asdada");
+
+        ModalRoutingCardEntity card3 = new ModalRoutingCardEntity();
+        card.setName("Routing Card #4 bnvnvbnvbnv 324423 asdada");
+
+        routingCards.add(card);
+        routingCards.add(card1);
+        routingCards.add(card2);
+        routingCards.add(card3);
+
+        return new ModelAndView("/routing/all_cards", "routingCards", routingCards);
+    }
+
+    @RequestMapping(value = { "/edit/id/{id}"}, method = RequestMethod.GET)
+    public String editDevice(@PathVariable("id") String id, Model model) {
+        model.addAttribute("card", modalRoutingCardService.get(id));
+        model.addAttribute("isEdit", true);
+
+        return "/routing/routing_card";
+    }
+
+
+    @RequestMapping(value = { "/delete/id/{id}"}, method = RequestMethod.GET)
+    public String deleteDevice(@PathVariable("id") String id, HttpServletRequest request,
+                               RedirectAttributes redirectAttributes) {
+        modalRoutingCardService.remove(id);
+        String referer = request.getHeader("Referer");
+        redirectAttributes.addFlashAttribute("message", "Device deleted successfully!");
+        return "redirect:" + referer;
     }
 }

@@ -77,10 +77,22 @@
                                         <a href="/drill//history"><i class="fa fa-bar-chart-o fa-fw"></i> Excavation History<span class="fa arrow"></span></a>
                                     </li>
                                     <li>
-                                        <a href="/drill/routing/card"><i class="fa fa-table fa-fw"></i>Documents</a>
+                                            <a href="#"><i class="fa fa-table fa-fw"></i>Experiments</a>
+                                            <ul class="nav nav-second-level">
+                                               <li>
+                                                   <a href="/drill/experiment/new"> New Experiment</a>
+                                               </li>
+                                               <li>
+                                                   <a href="/drill/experiment/history"> Experiment History</a>
+                                               </li>
+                                            </ul>
+                                           <!-- /.nav-second-level -->
+                                        </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-table fa-fw"></i>Documents</a>
                                         <ul class="nav nav-second-level">
                                            <li>
-                                               <a href="/drill/routing/card"> Routing Cards</a>
+                                               <a href="/drill/routing/allCards"> Routing Cards</a>
                                            </li>
                                            <li>
                                                <a href="/drill/params"> Global Params</a>

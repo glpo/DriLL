@@ -11,6 +11,6 @@ public class ParamsController {
     @RequestMapping(value = "/params", method = RequestMethod.GET)
     public ModelAndView getParams () {
 
-        return new ModelAndView("/params/params.jsp", "params", null);
+        return new ModelAndView("/params/params", "params", null);
     }
 }

@@ -10,11 +10,14 @@ import java.util.List;
 public class ModalRoutingCardEntity {
     public static final String MODAL_ROUTING_CARD_NAME = "routing_card";
 
-    public ModalRoutingCardEntity() {}
+    public ModalRoutingCardEntity() {
+    }
 
     @JsonIgnore
     @Id
     private String id;
+
+    private String name;
 
     private List<Integer> depth;
 
@@ -234,5 +237,21 @@ public class ModalRoutingCardEntity {
 
     public void setFluidType(List<String> fluidType) {
         this.fluidType = fluidType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
