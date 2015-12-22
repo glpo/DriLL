@@ -31,14 +31,90 @@
     <!-- jQuery -->
     <script language="javascript" type="text/javascript" src="resources/js/jquery.js"></script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
+    <link href="resources/css/examples.css" rel="stylesheet" type="text/css">
+
+    <script language="javascript" type="text/javascript" src="resources/js/jquery.flot.js"></script>
+
+	<script type="text/javascript">
+
+	$(function() {
+
+		var data = [],
+			totalPoints = 300;
+
+		function getRandomData() {
+
+			if (data.length > 0)
+				data = data.slice(1);
+
+			// Do a random walk
+
+			while (data.length < totalPoints) {
+
+				var prev = data.length > 0 ? data[data.length - 1] : 50,
+					y = prev + Math.random() * 10 - 5;
+
+				if (y < 0) {
+					y = 0;
+				} else if (y > 100) {
+					y = 100;
+				}
+
+				data.push(y);
+			}
+
+			// Zip the generated y values with the x values
+
+			var res = [];
+			for (var i = 0; i < data.length; ++i) {
+				res.push([i, data[i]])
+			}
+
+			return res;
+		}
+
+		var updateInterval = 240;
+		//$("#updateInterval").val(updateInterval).change(function () {
+		//	var v = $(this).val();
+		//	if (v && !isNaN(+v)) {
+		//		updateInterval = +v;
+		//		if (updateInterval < 1) {
+		//			updateInterval = 1;
+		//		} else if (updateInterval > 2000) {
+		//			updateInterval = 2000;
+		//		}
+		//		$(this).val("" + updateInterval);
+		//	}
+		//});
+
+		var plot = $.plot("#placeholder", [ getRandomData() ], {
+			series: {
+				shadowSize: 0	// Drawing is faster without shadows
+			},
+			yaxis: {
+				min: 0,
+				max: 100
+			},
+			xaxis: {
+				show: false
+			}
+		});
+
+		function update() {
+
+			plot.setData([getRandomData()]);
+
+			plot.draw();
+			setTimeout(update, updateInterval);
+		}
+
+		update();
+	});
+
+	</script>
 </head>
+
 <body>
     <div id="wrapper">
 
@@ -71,20 +147,19 @@
                                     <li>
                                         <a href="/drill/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                                     </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-table fa-fw"></i>Excavation</a>
-                                               <ul class="nav nav-second-level">
-                                                   <li>
-                                                       <a href="/drill/excavation/realtime"> Real-time Excavation</a>
-                                                   </li>
-                                                   <li>
-                                                       <a href="/drill/excavation/history"> Excavation History</a>
-                                                   </li>
-                                                </ul>
-                                               <!-- /.nav-second-level -->
-                                            </li>
-                                        <li>
-                                        <li>
+                                    <li>
+                                                                                <a href="#"><i class="fa fa-table fa-fw"></i>Excavation</a>
+                                                                                   <ul class="nav nav-second-level">
+                                                                                       <li>
+                                                                                           <a href="/drill/excavation/realtime"> Real-time Excavation</a>
+                                                                                       </li>
+                                                                                       <li>
+                                                                                           <a href="/drill/excavation/history"> Excavation History</a>
+                                                                                       </li>
+                                                                                    </ul>
+                                                                                   <!-- /.nav-second-level -->
+                                                                                </li>
+                                    <li>
                                             <a href="#"><i class="fa fa-table fa-fw"></i>Experiments</a>
                                             <ul class="nav nav-second-level">
                                                <li>
@@ -116,3 +191,19 @@
                     </nav>
 
                     <div id="page-wrapper">
+
+	<div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Real-time excavation process</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+	<div id="content">
+
+		<div class="demo-container">
+			<div id="placeholder" class="demo-placeholder"></div>
+		</div>
+	</div>
+
+<%@ include file="../misc/footer.jsp" %>

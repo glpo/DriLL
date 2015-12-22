@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/excavation")
 public class ExcavationFlotController {
 
     @Autowired
@@ -27,8 +28,13 @@ public class ExcavationFlotController {
         return excavationService.getAll();
     }
 
-    @RequestMapping(value = "/flot", method = RequestMethod.GET)
-    public String getFlot(){
-        return "flot";
+    @RequestMapping(value = "/realtime", method = RequestMethod.GET)
+    public String getRealTimeFlot(){
+        return "excavation/flot";
+    }
+
+    @RequestMapping(value = "/history", method = RequestMethod.GET)
+    public String getExcavationHistory(){
+        return "excavation/exc_history";
     }
 }

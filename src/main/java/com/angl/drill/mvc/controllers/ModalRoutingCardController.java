@@ -52,15 +52,19 @@ public class ModalRoutingCardController {
 
         ModalRoutingCardEntity card = new ModalRoutingCardEntity();
         card.setName("Routing Card #1 loollffooolo 324423 asdada");
+        card.setId("id1");
 
         ModalRoutingCardEntity card1 = new ModalRoutingCardEntity();
-        card.setName("Routing Card #2 ffgfdgdgdww 324423 asdada");
+        card1.setName("Routing Card #2 ffgfdgdgdww 324423 asdada");
+        card1.setId("id2");
 
         ModalRoutingCardEntity card2 = new ModalRoutingCardEntity();
-        card.setName("Routing Card #3 bnvnvbnvbnv 324423 asdada");
+        card2.setName("Routing Card #3 bnvnvbnvbnv 324423 asdada");
+        card2.setId("id3");
 
         ModalRoutingCardEntity card3 = new ModalRoutingCardEntity();
-        card.setName("Routing Card #4 bnvnvbnvbnv 324423 asdada");
+        card3.setName("Routing Card #4 bnvnvbnvbnv 324423 asdada");
+        card3.setId("id4");
 
         routingCards.add(card);
         routingCards.add(card1);
