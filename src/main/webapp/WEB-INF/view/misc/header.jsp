@@ -10,7 +10,6 @@
 
     <title>Drill - </title>
 
-    <!-- Bootstrap Core CSS -->
     <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
     <!-- MetisMenu CSS -->
@@ -28,7 +27,6 @@
     <!-- Custom Fonts -->
     <link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- jQuery -->
     <script language="javascript" type="text/javascript" src="resources/js/jquery.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,10 +36,30 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Bootstrap Core JavaScript -->
+        <script src="resources/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="resources/js/metisMenu.js"></script>
+
+        <!-- Morris Charts JavaScript -->
+        <script src="resources/js/raphael-min.js"></script>
+        <script src="resources/js/morris.min.js"></script>
+        <script src="resources/js/morris-data.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="resources/js/sb-admin-2.js"></script>
+
+        <script src="resources/js/excanvas.min.js"></script>
+
+        <script src="resources/js/jquery.flot.pie.js"></script>
+        <script src="resources/js/jquery.flot.resize.js"></script>
+        <script src="resources/js/jquery.flot.time.js"></script>
+        <script src="resources/js/jquery.flot.tooltip.min.js"></script>
+        <script src="resources/js/flot-data.js"></script>
 </head>
 <body>
     <div id="wrapper">
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -55,64 +73,63 @@
             </div>
             <!-- /.navbar-header -->
             <div class="navbar-default sidebar" role="navigation">
-                            <div class="sidebar-nav navbar-collapse">
-                                <ul class="nav" id="side-menu">
-                                    <li class="sidebar-search">
-                                        <div class="input-group custom-search-form">
-                                            <input type="text" class="form-control" placeholder="Search...">
-                                            <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button">
-                                                <i class="fa fa-search"></i>
-                                            </button>
-                                        </span>
-                                        </div>
-                                        <!-- /input-group -->
-                                    </li>
-                                    <li>
-                                        <a href="/drill/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                                    </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-table fa-fw"></i>Excavation</a>
-                                               <ul class="nav nav-second-level">
-                                                   <li>
-                                                       <a href="/drill/excavation/realtime"> Real-time Excavation</a>
-                                                   </li>
-                                                   <li>
-                                                       <a href="/drill/excavation/history"> Excavation History</a>
-                                                   </li>
-                                                </ul>
-                                               <!-- /.nav-second-level -->
-                                            </li>
-                                        <li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-table fa-fw"></i>Experiments</a>
-                                            <ul class="nav nav-second-level">
-                                               <li>
-                                                   <a href="/drill/experiment/new"> New Experiment</a>
-                                               </li>
-                                               <li>
-                                                   <a href="/drill/experiment/history"> Experiment History</a>
-                                               </li>
-                                            </ul>
-                                           <!-- /.nav-second-level -->
-                                        </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-table fa-fw"></i>Documents</a>
-                                        <ul class="nav nav-second-level">
-                                           <li>
-                                               <a href="/drill/routing/allCards"> Routing Cards</a>
-                                           </li>
-                                           <li>
-                                               <a href="/drill/params"> Global Params</a>
-                                           </li>
-                                        </ul>
-                                       <!-- /.nav-second-level -->
-                                    </li>
-                                </ul>
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
                             </div>
-                            <!-- /.sidebar-collapse -->
-                        </div>
-                        <!-- /.navbar-static-side -->
-                    </nav>
-
-                    <div id="page-wrapper">
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="/drill/dashboard/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                            <li>
+                                <a href="#"><i class="fa fa-table fa-fw"></i>Excavation</a>
+                                   <ul class="nav nav-second-level">
+                                       <li>
+                                           <a href="/drill/excavation/realtime"> Real-time Excavation</a>
+                                       </li>
+                                       <li>
+                                           <a href="/drill/excavation/history"> Excavation History</a>
+                                       </li>
+                                    </ul>
+                                   <!-- /.nav-second-level -->
+                                </li>
+                            <li>
+                            <li>
+                                <a href="#"><i class="fa fa-table fa-fw"></i>Experiments</a>
+                                <ul class="nav nav-second-level">
+                                   <li>
+                                       <a href="/drill/experiment/new"> New Experiment</a>
+                                   </li>
+                                   <li>
+                                       <a href="/drill/experiment/history"> Experiment History</a>
+                                   </li>
+                                </ul>
+                               <!-- /.nav-second-level -->
+                            </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i>Documents</a>
+                            <ul class="nav nav-second-level">
+                               <li>
+                                   <a href="/drill/routing/allCards"> Routing Cards</a>
+                               </li>
+                               <li>
+                                   <a href="/drill/params"> Global Params</a>
+                               </li>
+                            </ul>
+                           <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+    <div id="page-wrapper">

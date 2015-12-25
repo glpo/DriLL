@@ -3,59 +3,59 @@ $(function() {
     Morris.Area({
         element: 'morris-area-chart',
         data: [{
-            period: '2010 Q1',
-            iphone: 2666,
-            ipad: null,
-            itouch: 2647
+            period: '15:00 Q1',
+            breed1: 2666,
+            breed2: null,
+            breed3: 2647
         }, {
-            period: '2010 Q2',
-            iphone: 2778,
-            ipad: 2294,
-            itouch: 2441
+            period: '15:10 Q2',
+            breed1: 2778,
+            breed2: 2294,
+            breed3: 2441
         }, {
-            period: '2010 Q3',
-            iphone: 4912,
-            ipad: 1969,
-            itouch: 2501
+            period: '15:20 Q3',
+            breed1: 4912,
+            breed2: 1969,
+            breed3: 2501
         }, {
-            period: '2010 Q4',
-            iphone: 3767,
-            ipad: 3597,
-            itouch: 5689
+            period: '15:30 Q4',
+            breed1: 3767,
+            breed2: 3597,
+            breed3: 5689
         }, {
-            period: '2011 Q1',
-            iphone: 6810,
-            ipad: 1914,
-            itouch: 2293
+            period: '15:40 Q1',
+            breed1: 6810,
+            breed2: 1914,
+            breed3: 2293
         }, {
-            period: '2011 Q2',
-            iphone: 5670,
-            ipad: 4293,
-            itouch: 1881
+            period: '15:50 Q2',
+            breed1: 5670,
+            breed2: 4293,
+            breed3: 1881
         }, {
-            period: '2011 Q3',
-            iphone: 4820,
-            ipad: 3795,
-            itouch: 1588
+            period: '16:00 Q3',
+            breed1: 4820,
+            breed2: 3795,
+            breed3: 1588
         }, {
-            period: '2011 Q4',
-            iphone: 15073,
-            ipad: 5967,
-            itouch: 5175
+            period: '16:10 Q4',
+            breed1: 15073,
+            breed2: 5967,
+            breed3: 5175
         }, {
-            period: '2012 Q1',
-            iphone: 10687,
-            ipad: 4460,
-            itouch: 2028
+            period: '16:20 Q1',
+            breed1: 10687,
+            breed2: 4460,
+            breed3: 2028
         }, {
-            period: '2012 Q2',
-            iphone: 8432,
-            ipad: 5713,
-            itouch: 1791
+            period: '16:30 Q2',
+            breed1: 8432,
+            breed2: 5713,
+            breed3: 1791
         }],
         xkey: 'period',
-        ykeys: ['iphone', 'ipad', 'itouch'],
-        labels: ['iPhone', 'iPad', 'iPod Touch'],
+        ykeys: ['breed1', 'breed2', 'breed3'],
+        labels: ['Breed 1', 'Breed 2', 'Breed 3'],
         pointSize: 2,
         hideHover: 'auto',
         resize: true
@@ -64,14 +64,17 @@ $(function() {
     Morris.Donut({
         element: 'morris-donut-chart',
         data: [{
-            label: "Download Sales",
-            value: 12
+            label: "Breed #1",
+            value: 120
         }, {
-            label: "In-Store Sales",
-            value: 30
+            label: "Breed #2",
+            value: 300
         }, {
-            label: "Mail-Order Sales",
-            value: 20
+            label: "Breed #3",
+            value: 200
+        }, {
+            label: "Breed #4",
+            value: 175
         }],
         resize: true
     });
@@ -79,31 +82,31 @@ $(function() {
     Morris.Bar({
         element: 'morris-bar-chart',
         data: [{
-            y: '2006',
+            y: '15:00',
             a: 100,
             b: 90
         }, {
-            y: '2007',
+            y: '15:10',
             a: 75,
             b: 65
         }, {
-            y: '2008',
+            y: '15:20',
             a: 50,
             b: 40
         }, {
-            y: '2009',
+            y: '15:30',
             a: 75,
             b: 65
         }, {
-            y: '2010',
+            y: '15:40',
             a: 50,
             b: 40
         }, {
-            y: '2011',
+            y: '15:50',
             a: 75,
             b: 65
         }, {
-            y: '2012',
+            y: '16:00',
             a: 100,
             b: 90
         }],
@@ -113,5 +116,4 @@ $(function() {
         hideHover: 'auto',
         resize: true
     });
-
 });

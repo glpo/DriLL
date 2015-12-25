@@ -31,14 +31,21 @@
     <!-- jQuery -->
     <script language="javascript" type="text/javascript" src="resources/js/jquery.js"></script>
 
-
     <link href="resources/css/examples.css" rel="stylesheet" type="text/css">
 
     <script language="javascript" type="text/javascript" src="resources/js/jquery.flot.js"></script>
 
+     <!-- Bootstrap Core JavaScript -->
+            <script src="resources/js/bootstrap.min.js"></script>
+
+     <!-- Metis Menu Plugin JavaScript -->
+     <script src="resources/js/metisMenu.js"></script>
+
 	<script type="text/javascript">
 
 	$(function() {
+
+	    var continueProcess = false;
 
 		var data = [],
 			totalPoints = 300;
@@ -88,6 +95,21 @@
 		//	}
 		//});
 
+		$("#startBtn").click(function() {
+            update();
+            continueProcess = true;
+
+            $("#startBtn").hide();
+            $("#stopBtn").show();
+		});
+
+		$("#stopBtn").click(function() {
+            continueProcess = false;
+
+            $("#startBtn").show();
+            $("#stopBtn").hide();
+        });
+
 		var plot = $.plot("#placeholder", [ getRandomData() ], {
 			series: {
 				shadowSize: 0	// Drawing is faster without shadows
@@ -102,14 +124,17 @@
 		});
 
 		function update() {
-
-			plot.setData([getRandomData()]);
+		    if(continueProcess) {
+			    plot.setData([getRandomData()]);
+		    }
 
 			plot.draw();
 			setTimeout(update, updateInterval);
 		}
 
-		update();
+        if(continueProcess) {
+		  update();
+		}
 	});
 
 	</script>
@@ -131,79 +156,102 @@
             </div>
             <!-- /.navbar-header -->
             <div class="navbar-default sidebar" role="navigation">
-                            <div class="sidebar-nav navbar-collapse">
-                                <ul class="nav" id="side-menu">
-                                    <li class="sidebar-search">
-                                        <div class="input-group custom-search-form">
-                                            <input type="text" class="form-control" placeholder="Search...">
-                                            <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button">
-                                                <i class="fa fa-search"></i>
-                                            </button>
-                                        </span>
-                                        </div>
-                                        <!-- /input-group -->
-                                    </li>
-                                    <li>
-                                        <a href="/drill/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                                    </li>
-                                    <li>
-                                                                                <a href="#"><i class="fa fa-table fa-fw"></i>Excavation</a>
-                                                                                   <ul class="nav nav-second-level">
-                                                                                       <li>
-                                                                                           <a href="/drill/excavation/realtime"> Real-time Excavation</a>
-                                                                                       </li>
-                                                                                       <li>
-                                                                                           <a href="/drill/excavation/history"> Excavation History</a>
-                                                                                       </li>
-                                                                                    </ul>
-                                                                                   <!-- /.nav-second-level -->
-                                                                                </li>
-                                    <li>
-                                            <a href="#"><i class="fa fa-table fa-fw"></i>Experiments</a>
-                                            <ul class="nav nav-second-level">
-                                               <li>
-                                                   <a href="/drill/experiment/new"> New Experiment</a>
-                                               </li>
-                                               <li>
-                                                   <a href="/drill/experiment/history"> Experiment History</a>
-                                               </li>
-                                            </ul>
-                                           <!-- /.nav-second-level -->
-                                        </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-table fa-fw"></i>Documents</a>
-                                        <ul class="nav nav-second-level">
-                                           <li>
-                                               <a href="/drill/routing/allCards"> Routing Cards</a>
-                                           </li>
-                                           <li>
-                                               <a href="/drill/params"> Global Params</a>
-                                           </li>
-                                        </ul>
-                                       <!-- /.nav-second-level -->
-                                    </li>
-                                </ul>
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
                             </div>
-                            <!-- /.sidebar-collapse -->
-                        </div>
-                        <!-- /.navbar-static-side -->
-                    </nav>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="/drill/dashboard/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i>Excavation</a>
+                               <ul class="nav nav-second-level">
+                                   <li>
+                                       <a href="/drill/excavation/realtime"> Real-time Excavation</a>
+                                   </li>
+                                   <li>
+                                       <a href="/drill/excavation/history"> Excavation History</a>
+                                   </li>
+                                </ul>
+                               <!-- /.nav-second-level -->
+                            </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i>Experiments</a>
+                            <ul class="nav nav-second-level">
+                               <li>
+                                   <a href="/drill/experiment/new"> New Experiment</a>
+                               </li>
+                               <li>
+                                   <a href="/drill/experiment/history"> Experiment History</a>
+                               </li>
+                            </ul>
+                           <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i>Documents</a>
+                            <ul class="nav nav-second-level">
+                               <li>
+                                   <a href="/drill/routing/allCards"> Routing Cards</a>
+                               </li>
+                               <li>
+                                   <a href="/drill/params"> Global Params</a>
+                               </li>
+                            </ul>
+                           <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
 
-                    <div id="page-wrapper">
+<div id="page-wrapper">
 
-	<div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Real-time excavation process</h1>
-        </div>
-        <!-- /.col-lg-12 -->
+<div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Real-time excavation process</h1>
     </div>
+</div>
 
-	<div id="content">
-
-		<div class="demo-container">
-			<div id="placeholder" class="demo-placeholder"></div>
-		</div>
-	</div>
+<div class="panel panel-default">
+   <div class="panel-heading">
+        <i class="fa fa-bar-chart-o fa-fw"></i> Excavation Chart
+        <div class="pull-right">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                    Actions
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li><a href="#">Save</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Clear</a></li>
+                </ul>
+            </div>
+        </div>
+   </div>
+   <!-- /.panel-heading -->
+   <div id="content">
+       <div class="demo-container">
+           <div id="placeholder" class="demo-placeholder"></div>
+       </div>
+       <p>
+            <button type="button" class="btn btn-outline btn-primary" id="startBtn">Start Process</button>
+            <button type="button" class="btn btn-outline btn-primary" id="stopBtn" style="display: none;">Stop Process</button>
+       </p>
+   </div>
+   <!-- /.panel-body -->
+</div>
+ <!-- /.panel -->
 
 <%@ include file="../misc/footer.jsp" %>

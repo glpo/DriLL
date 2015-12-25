@@ -16,9 +16,6 @@ public class MainController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ExcavationService excavationService;
-
     private UserEntity userEntity;
 
    @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -27,14 +24,5 @@ public class MainController {
         //map.put("user", userEntity);
 
         return "login";
-    }
-
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String getDashboard(){
-        //ModelAndView modelAndView = new ModelAndView("dashboard");
-        //modelAndView.addObject("excavation", excavationService.getAll());
-
-        //return modelAndView;
-        return "/dashboard/dashboard";
     }
 }

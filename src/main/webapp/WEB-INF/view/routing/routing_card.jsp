@@ -47,23 +47,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         <c:forEach var="routingCards" items="${card}">
+                                         <c:forEach var="crd" items="${card}">
                                                 <tr>
-                                                    <td>${card.depth}</td>
-                                                    <td>${card.litology}</td>
-                                                    <td>${card.constans}</td>
-                                                    <td>${card.constraction}</td>
-                                                    <td>${card.complications}</td>
-                                                    <td>${card.bitSize}</td>
-                                                    <td>${card.depth}</td>
-                                                    <td>${card.depth}</td>
-                                                    <td>${card.depth}</td>
-                                                    <td>${card.depth}</td>
-                                                    <td>${card.depth}</td>
-                                                    <td>${card.depth}</td>
-                                                    <td>${card.depth}</td>
-                                                    <td>${card.depth}</td>
-                                                    <td>${card.depth}</td>
+                                                    <td>${crd.name}</td>
                                                 </tr>
                                             </c:forEach>
                                     </tbody>
