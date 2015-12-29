@@ -1,6 +1,7 @@
 package com.angl.drill.services;
 
 import com.angl.drill.db.entity.UserEntity;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -9,9 +10,9 @@ public interface UserService {
 
     void update(UserEntity entity);
 
-    UserEntity get(String id);
+    UserEntity get(ObjectId id);
 
     List<UserEntity> getAll();
 
-    void remove(String id);
+    void remove(ObjectId id);
 }

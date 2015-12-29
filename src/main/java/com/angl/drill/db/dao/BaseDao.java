@@ -1,5 +1,6 @@
 package com.angl.drill.db.dao;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -23,7 +24,7 @@ public abstract class BaseDao<T> {
         mongoOperations.save(entity);
     }
 
-    public T get(String id) {
+    public T get(ObjectId id) {
         return mongoOperations.findOne(Query.query(Criteria.where("id").is(id)), clazz);
     }
 
@@ -31,7 +32,7 @@ public abstract class BaseDao<T> {
         return mongoOperations.findAll(clazz);
     }
 
-    public void remove(String id) {
+    public void remove(ObjectId id) {
         mongoOperations.remove(Query.query(Criteria.where("id").is(id)), clazz);
     }
 }

@@ -4,36 +4,34 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = ExcavationEntity.COLLECTION_NAME)
+import java.util.Date;
+
 public class ExcavationEntity {
-    public static final String COLLECTION_NAME = "excavation";
 
-    @JsonIgnore
-    @Id
-    private String id;
-
-    private Integer time;
-    private Integer exc;
+    private Date time;
+    private int exc;
 
     public ExcavationEntity() {
     }
 
-    public ExcavationEntity(Integer excavation, Integer time) {
+    public ExcavationEntity(int excavation, Date time) {
         this.exc = excavation;
         this.time = time;
     }
 
-    public Integer getExc() {
+    public int getExc() {
         return exc;
     }
 
-    public Integer getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public String getId() {
-        return id;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
-
+    public void setExc(int exc) {
+        this.exc = exc;
+    }
 }

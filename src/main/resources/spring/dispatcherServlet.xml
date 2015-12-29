@@ -21,6 +21,8 @@
     <mvc:resources mapping="/params/resources/**" location="/resources/" />
     <mvc:resources mapping="/experiment/resources/**" location="/resources/" />
     <mvc:resources mapping="/excavation/resources/**" location="/resources/" />
+    <mvc:resources mapping="/excavation/edit/id/resources/**" location="/resources/" />
+    <mvc:resources mapping="/excavation/delete/id/resources/**" location="/resources/" />
     <mvc:resources mapping="/dashboard/resources/**" location="/resources/" />
     <mvc:resources mapping="/view/resources/**" location="/resources/" />
     <mvc:resources mapping="/drill/resources/**" location="/resources/" />

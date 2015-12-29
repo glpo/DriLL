@@ -2,6 +2,7 @@ package com.angl.drill.mvc.controllers;
 
 import com.angl.drill.db.entity.ModalRoutingCardEntity;
 import com.angl.drill.services.ModalRoutingCardService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,7 +78,7 @@ public class ModalRoutingCardController {
     }
 
     @RequestMapping(value = { "/edit/id/{id}"}, method = RequestMethod.GET)
-    public String editDevice(@PathVariable("id") String id, Model model) {
+    public String editDevice(@PathVariable("id") ObjectId id, Model model) {
         model.addAttribute("card", modalRoutingCardService.get(id));
         model.addAttribute("isEdit", true);
 
@@ -86,7 +87,7 @@ public class ModalRoutingCardController {
 
 
     @RequestMapping(value = { "/delete/id/{id}"}, method = RequestMethod.GET)
-    public String deleteDevice(@PathVariable("id") String id, HttpServletRequest request,
+    public String deleteDevice(@PathVariable("id") ObjectId id, HttpServletRequest request,
                                RedirectAttributes redirectAttributes) {
         modalRoutingCardService.remove(id);
         String referer = request.getHeader("Referer");

@@ -1,5 +1,6 @@
 package com.angl.drill.services;
 
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -11,9 +12,9 @@ public abstract class BaseService<T> {
 
     public abstract void update(T entity);
 
-    public abstract <T> T get(String id);
+    public abstract <T> T get(ObjectId id);
 
     public abstract <T> List<T> getAll();
 
-    public abstract void remove(String id);
+    public abstract void remove(ObjectId id);
 }

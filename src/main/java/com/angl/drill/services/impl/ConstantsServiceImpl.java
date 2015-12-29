@@ -3,6 +3,7 @@ package com.angl.drill.services.impl;
 import com.angl.drill.db.dao.ConstantsDAO;
 import com.angl.drill.db.entity.ConstantsEntity;
 import com.angl.drill.services.ConstantsService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class ConstantsServiceImpl implements ConstantsService {
         constantsDAO.save(entity);
     }
 
-    public void remove(String id) {
+    public void remove(ObjectId id) {
         constantsDAO.remove(id);
     }
 
@@ -32,7 +33,7 @@ public class ConstantsServiceImpl implements ConstantsService {
         return constantsDAO.getAll();
     }
 
-    public ConstantsEntity get(String id) {
+    public ConstantsEntity get(ObjectId id) {
         return constantsDAO.get(id);
     }
 }

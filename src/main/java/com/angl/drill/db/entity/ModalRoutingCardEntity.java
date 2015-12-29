@@ -8,7 +8,7 @@ import java.util.List;
 
 @Document(collection = ModalRoutingCardEntity.MODAL_ROUTING_CARD_NAME)
 public class ModalRoutingCardEntity {
-    public static final String MODAL_ROUTING_CARD_NAME = "routing_card";
+    public static final String MODAL_ROUTING_CARD_NAME = "routing_cards";
 
     public ModalRoutingCardEntity() {
     }

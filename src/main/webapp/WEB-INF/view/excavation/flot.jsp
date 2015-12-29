@@ -137,6 +137,21 @@
 		}
 	});
 
+	function clearPlot() {
+        $.plot("#placeholder", null, {
+            series: {
+                shadowSize: 0	// Drawing is faster without shadows
+            },
+            yaxis: {
+                min: 0,
+                max: 100
+            },
+            xaxis: {
+                show: false
+            }
+        });
+    }
+
 	</script>
 </head>
 
@@ -233,9 +248,9 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="#">Save</a></li>
+                    <li><a href="#" >Save</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Clear</a></li>
+                    <li><a href="#" onClick="clearPlot()">Clear</a></li>
                 </ul>
             </div>
         </div>

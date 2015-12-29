@@ -3,6 +3,7 @@ package com.angl.drill.services.impl;
 import com.angl.drill.db.dao.UserDAO;
 import com.angl.drill.db.entity.UserEntity;
 import com.angl.drill.services.UserService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
         userDAO.save(entity);
     }
 
-    public UserEntity get(String id) {
+    public UserEntity get(ObjectId id) {
         return userDAO.get(id);
     }
 
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
         return userDAO.getAll();
     }
 
-    public void remove(String id) {
+    public void remove(ObjectId id) {
         userDAO.remove(id);
     }
 }

@@ -1,18 +1,20 @@
 package com.angl.drill.services;
 
 import com.angl.drill.db.entity.ExcavationEntity;
+import com.angl.drill.db.entity.ExcavationSessionEntity;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
 public interface ExcavationService {
 
-    void add(ExcavationEntity entity);
+    void add(ExcavationSessionEntity entity);
 
-    void update(ExcavationEntity entity);
+    void update(ExcavationSessionEntity entity);
 
-    ExcavationEntity get(String id);
+    ExcavationSessionEntity get(ObjectId id);
 
-    List<ExcavationEntity> getAll();
+    List<ExcavationSessionEntity> getAll();
 
-    void remove(String id);
+    void remove(ObjectId id);
 }

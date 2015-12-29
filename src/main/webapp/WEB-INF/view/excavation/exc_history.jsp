@@ -23,16 +23,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                                <c:forEach var="hist" items="${exc_history}">
+                                <c:forEach var="hist" items="${exc_history}" varStatus="loop">
                                     <tr class="odd gradeX">
-                                        <td>1</td>
-                                        <td>${hist}</td>
+                                        <td>${loop.index + 1}</td>
+                                        <td>Excavation Session #${hist.sessionNumber}</td>
                                         <td>
-                                            <a href="routing/edit/id/${card.id}" id="${card.id}">
+                                            <a href="edit/id/${hist.id}" id="${hist.id}">
                                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                             </a>
                                              |
-                                            <a class="confirm" href="routing/delete/id/${card.id}" id="${card.id}">
+                                            <a class="confirm" href="delete/id/${hist.id}" id="${hist.id}">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                             </a>
                                         </td>

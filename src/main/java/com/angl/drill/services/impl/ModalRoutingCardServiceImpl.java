@@ -4,6 +4,7 @@ import com.angl.drill.db.dao.ModalRoutingCardDAO;
 import com.angl.drill.db.entity.ModalRoutingCardEntity;
 import com.angl.drill.services.BaseService;
 import com.angl.drill.services.ModalRoutingCardService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,7 @@ public class ModalRoutingCardServiceImpl extends BaseService<ModalRoutingCardEnt
         modalRoutingCardDAO.save(entity);
     }
 
-    public ModalRoutingCardEntity get(String id) {
+    public ModalRoutingCardEntity get(ObjectId id) {
         return modalRoutingCardDAO.get(id);
     }
 
@@ -36,7 +37,7 @@ public class ModalRoutingCardServiceImpl extends BaseService<ModalRoutingCardEnt
     }
 
     @Override
-    public void remove(String id) {
+    public void remove(ObjectId id) {
         modalRoutingCardDAO.remove(id);
     }
 }
