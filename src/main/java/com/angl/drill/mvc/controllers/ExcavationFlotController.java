@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Controller
@@ -76,6 +74,35 @@ public class ExcavationFlotController {
         model.put("sessionNumber", sessionEntity.getSessionNumber());
         model.put("isExperiment", sessionEntity.isExperiment());
         model.put("excavation", sessionEntity.getExcavation());
+
+        return "excavation/exc_edit";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String saveExcavationAfterEdit(HttpServletRequest request, ModelMap model){
+        String idStr = request.getParameter("id");
+        ObjectId id = new ObjectId(idStr);
+        String[] excs = request.getParameterValues("exc");
+
+        ExcavationSessionEntity excavationSession = excavationService.get(id);
+
+        if(excavationSession != null) {
+            List<ExcavationEntity> excavation = excavationSession.getExcavation();
+            for(int i = 0; i < excavation.size(); i++) {
+                ExcavationEntity exc = excavation.get(i);
+                exc.setExc(Integer.parseInt(excs[i]));
+            }
+
+            excavationSession.setExcavation(excavation);
+            excavationService.update(excavationSession);
+
+            int sessionNumber = excavationSession.getSessionNumber();
+            model.put("id", excavationSession.getId());
+            model.put("sessionNumber", sessionNumber);
+            model.put("isExperiment", excavationSession.isExperiment());
+            model.put("excavation", excavationSession.getExcavation());
+            model.put("message", "Excavation Session#" + sessionNumber + " Updated Successfully");
+        }
 
         return "excavation/exc_edit";
     }

@@ -9,11 +9,17 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-               Excavation Session #${sessionNumber}
+               Excavation Session #${sessionNumber} Is Experiment: ${isExperiment}
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
+                <c:if test="${not empty message}">
+                    <div class="alert alert-success">
+                        ${message}
+                    </div>
+                </c:if>
                 <div class="dataTable_wrapper">
+                <form action="/drill/excavation/edit" method="post">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
@@ -22,14 +28,18 @@
                         </thead>
                         <tbody>
                             <tr class="odd gradeX">
-                                <td> Excavation: </br>
                                     <c:forEach var="excvtn" items="${excavation}" varStatus="loop">
-                                        Time: ${excvtn.time}; Excavation: ${excvtn.exc} </br>
+                                        <label>Time: ${excvtn.time}</label> <br>
+                                        <label>Excavation:</label> <input class="form-control" value="${excvtn.exc}" name="exc"> </br>
+                                        <input value="${id}" name="id" type="hidden">
                                     </c:forEach>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    <button type="submit" class="btn btn-default">Save</button>
+                    <button type="reset" class="btn btn-default">Reset</button>
+                 </form>
                 </div>
                 <!-- /.table-responsive -->
             </div>
