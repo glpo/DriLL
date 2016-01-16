@@ -34,7 +34,7 @@ public class ModalRoutingCardController {
       /*  entity.setDepth(Arrays.asList(100, 200, 300, 400, 500, 600, 700));
         entity.setLitology(null);
         entity.setConstans(Arrays.asList("K,470", "K2,1", "J 1690", "T, 2445", "P1, 2675", "C, 3120"));
-        entity.setConstraction(Arrays.asList("426 mm", "324 mm", "245 mm", "146 mm", "148 mm"));
+        entity.setConstruction(Arrays.asList("426 mm", "324 mm", "245 mm", "146 mm", "148 mm"));
         entity.setComplications(Arrays.asList("Poglinannya 23423423", "Osipannya 34535345", "4353453535", "3453453543", "345345345345", "345345345345345435", "3453453453454353534534"));
         entity.setBitSize(Arrays.asList("23423", "324234", "234234", "23423432", "53533"));
         entity.set
@@ -51,30 +51,8 @@ public class ModalRoutingCardController {
     @RequestMapping(value = "/allCards", method = RequestMethod.GET)
     public ModelAndView getAllRoutingCards() {
         //List<ModalRoutingCardEntity> routingCards = modalRoutingCardService.getAll();
-        List<ModalRoutingCardEntity> routingCards = new ArrayList<ModalRoutingCardEntity>();
 
-        ModalRoutingCardEntity card = new ModalRoutingCardEntity();
-        card.setName("Routing Card #1 loollffooolo 324423 asdada");
-        card.setId("id1");
-
-        ModalRoutingCardEntity card1 = new ModalRoutingCardEntity();
-        card1.setName("Routing Card #2 ffgfdgdgdww 324423 asdada");
-        card1.setId("id2");
-
-        ModalRoutingCardEntity card2 = new ModalRoutingCardEntity();
-        card2.setName("Routing Card #3 bnvnvbnvbnv 324423 asdada");
-        card2.setId("id3");
-
-        ModalRoutingCardEntity card3 = new ModalRoutingCardEntity();
-        card3.setName("Routing Card #4 bnvnvbnvbnv 324423 asdada");
-        card3.setId("id4");
-
-        routingCards.add(card);
-        routingCards.add(card1);
-        routingCards.add(card2);
-        routingCards.add(card3);
-
-        return new ModelAndView("/routing/all_cards", "routingCards", routingCards);
+        return new ModelAndView("/routing/all_cards", "routingCards", null);
     }
 
     @RequestMapping(value = { "/edit/id/{id}"}, method = RequestMethod.GET)

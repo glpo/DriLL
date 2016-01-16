@@ -16,4 +16,6 @@ public interface ExcavationDAO {
     List<ExcavationSessionEntity> getAll();
 
     void remove(ObjectId id);
+
+    int getMaxSessionNumber();
 }

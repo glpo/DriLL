@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public abstract class BaseDao<T> {
     @Autowired
-    private MongoOperations mongoOperations;
+    protected MongoOperations mongoOperations;
 
     private Class<T> clazz;
 
