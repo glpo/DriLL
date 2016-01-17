@@ -24,9 +24,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <c:forEach var="experiment" items="${experiments}">
+                                            <c:forEach var="experiment" items="${experiments}" varStatus="loop">
                                                 <tr class="odd gradeX">
-                                                    <td>1</td>
+                                                    <td>${loop.index + 1}</td>
                                                     <td>${experiment}</td>
                                                     <td>
                                                         <a href="routing/edit/id/${card.id}" id="${card.id}">

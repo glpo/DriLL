@@ -26,7 +26,7 @@ public class ModalRoutingCardEntity {
 
     private List<String> constans;
 
-    private List<String> constraction;
+    private List<String> construction;
 
     private List<String> complications;
 
@@ -76,8 +76,8 @@ public class ModalRoutingCardEntity {
         return constans;
     }
 
-    public List<String> getConstraction() {
-        return constraction;
+    public List<String> getConstruction() {
+        return construction;
     }
 
     public List<String> getComplications() {
@@ -164,8 +164,8 @@ public class ModalRoutingCardEntity {
         this.constans = constans;
     }
 
-    public void setConstraction(List<String> constraction) {
-        this.constraction = constraction;
+    public void setConstruction(List<String> construction) {
+        this.construction = construction;
     }
 
     public void setComplications(List<String> complications) {

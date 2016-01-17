@@ -126,6 +126,12 @@
                             </ul>
                            <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                            <a href="/drill/drillholes/all"><i class="fa fa-table fa-fw"></i>Drill-holes</a>
+                        </li>
+                        <li>
+                            <a href="/drill/reports/all"><i class="fa fa-table fa-fw"></i>Reports</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
