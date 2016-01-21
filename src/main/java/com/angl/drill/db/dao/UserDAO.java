@@ -1,17 +1,17 @@
 package com.angl.drill.db.dao;
 
-import com.angl.drill.db.entity.UserEntity;
+import com.angl.drill.db.entity.User;
 import org.bson.types.ObjectId;
 
 import java.util.List;
 
 public interface UserDAO {
 
-    void save(UserEntity entity);
+    void save(User entity);
 
-    UserEntity get(ObjectId id);
+    User get(ObjectId id);
 
-    List<UserEntity> getAll();
+    List<User> getAll();
 
     void remove(ObjectId id);
 }

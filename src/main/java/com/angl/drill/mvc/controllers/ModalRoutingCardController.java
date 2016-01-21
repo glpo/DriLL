@@ -1,6 +1,6 @@
 package com.angl.drill.mvc.controllers;
 
-import com.angl.drill.db.entity.ModalRoutingCardEntity;
+import com.angl.drill.db.entity.ModalRoutingCard;
 import com.angl.drill.services.ModalRoutingCardService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 @Controller
 @RequestMapping("/routing")
@@ -27,8 +24,8 @@ public class ModalRoutingCardController {
 
     @RequestMapping(value = "/card", method = RequestMethod.GET)
     public ModelAndView getRoutingCard () {
-        //ModalRoutingCardEntity routingCard = modalRoutingCardService.get();
-        ModalRoutingCardEntity entity = new ModalRoutingCardEntity();
+        //ModalRoutingCard routingCard = modalRoutingCardService.get();
+        ModalRoutingCard entity = new ModalRoutingCard();
 
         entity.setName("Routing Card #1 loollffooolo 324423 asdada");
       /*  entity.setDepth(Arrays.asList(100, 200, 300, 400, 500, 600, 700));
@@ -50,7 +47,7 @@ public class ModalRoutingCardController {
 
     @RequestMapping(value = "/allCards", method = RequestMethod.GET)
     public ModelAndView getAllRoutingCards() {
-        //List<ModalRoutingCardEntity> routingCards = modalRoutingCardService.getAll();
+        //List<ModalRoutingCard> routingCards = modalRoutingCardService.getAll();
 
         return new ModelAndView("/routing/all_cards", "routingCards", null);
     }

@@ -1,7 +1,7 @@
 package com.angl.drill.mvc.controllers;
 
-import com.angl.drill.db.entity.ExcavationEntity;
-import com.angl.drill.db.entity.ExcavationSessionEntity;
+import com.angl.drill.db.entity.Excavation;
+import com.angl.drill.db.entity.ExcavationSession;
 import com.angl.drill.services.ExcavationService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -35,7 +34,7 @@ public class ExcavationFlotController {
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
     public String getExcavationHistory(ModelMap model){
-        List<ExcavationSessionEntity> excavationSessions = excavationService.getAll();
+        List<ExcavationSession> excavationSessions = excavationService.getAll();
 
         model.put("exc_history", excavationSessions);
         return "excavation/exc_history";
@@ -44,10 +43,10 @@ public class ExcavationFlotController {
     @RequestMapping(value = "genTestExcavation", method = RequestMethod.GET)
     public String generateTestExcavation() {
         for(int i = 0; i < 5; i++) {
-            List<ExcavationEntity> excavation = new ArrayList<ExcavationEntity>(20);
+            List<Excavation> excavation = new ArrayList<Excavation>(20);
 
             for (int j = 0; j < 20; j++) {
-                excavation.add(new ExcavationEntity(ThreadLocalRandom.current().nextInt(0, 15 + 1), new Date()));
+                excavation.add(new Excavation(ThreadLocalRandom.current().nextInt(0, 15 + 1), new Date()));
                 try {
                     Thread.currentThread().sleep(350);
                 } catch (InterruptedException e) {
@@ -55,7 +54,7 @@ public class ExcavationFlotController {
                 }
             }
 
-            ExcavationSessionEntity excavationSession = new ExcavationSessionEntity();
+            ExcavationSession excavationSession = new ExcavationSession();
             excavationSession.setExcavation(excavation);
             excavationSession.setIsExperiment(true);
             excavationSession.setSessionNumber(i);
@@ -68,7 +67,7 @@ public class ExcavationFlotController {
 
     @RequestMapping(value = "/edit/id/{id}", method = RequestMethod.GET)
     public String getExcavationSessionForEdit(@PathVariable("id") ObjectId id, ModelMap model){
-        ExcavationSessionEntity sessionEntity = excavationService.get(id);
+        ExcavationSession sessionEntity = excavationService.get(id);
 
         model.put("id", sessionEntity.getId());
         model.put("sessionNumber", sessionEntity.getSessionNumber());
@@ -84,12 +83,12 @@ public class ExcavationFlotController {
         ObjectId id = new ObjectId(idStr);
         String[] excs = request.getParameterValues("exc");
 
-        ExcavationSessionEntity excavationSession = excavationService.get(id);
+        ExcavationSession excavationSession = excavationService.get(id);
 
         if(excavationSession != null) {
-            List<ExcavationEntity> excavation = excavationSession.getExcavation();
+            List<Excavation> excavation = excavationSession.getExcavation();
             for(int i = 0; i < excavation.size(); i++) {
-                ExcavationEntity exc = excavation.get(i);
+                Excavation exc = excavation.get(i);
                 exc.setExc(Integer.parseInt(excs[i]));
             }
 

@@ -1,7 +1,7 @@
 package com.angl.drill.services.impl;
 
 import com.angl.drill.db.dao.UserDAO;
-import com.angl.drill.db.entity.UserEntity;
+import com.angl.drill.db.entity.User;
 import com.angl.drill.services.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +17,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDAO;
 
-    public void add(UserEntity entity) {
+    public void add(User entity) {
         userDAO.save(entity);
     }
 
-    public void update(UserEntity entity) {
+    public void update(User entity) {
         userDAO.save(entity);
     }
 
-    public UserEntity get(ObjectId id) {
+    public User get(ObjectId id) {
         return userDAO.get(id);
     }
 
-    public List<UserEntity> getAll() {
+    public List<User> getAll() {
         return userDAO.getAll();
     }
 

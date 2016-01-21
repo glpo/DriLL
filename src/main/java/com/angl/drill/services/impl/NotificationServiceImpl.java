@@ -1,7 +1,7 @@
 package com.angl.drill.services.impl;
 
 import com.angl.drill.db.dao.NotificationDAO;
-import com.angl.drill.db.entity.NotificationEntity;
+import com.angl.drill.db.entity.Notification;
 import com.angl.drill.services.BaseService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,27 +12,27 @@ import java.util.List;
 
 @Service
 @Transactional
-public class NotificationServiceImpl extends BaseService<NotificationEntity> implements NotificationDAO{
+public class NotificationServiceImpl extends BaseService<Notification> implements NotificationDAO{
     @Autowired
     NotificationDAO notificationDAO;
 
     @Override
-    public void add(NotificationEntity entity) {
+    public void add(Notification entity) {
         notificationDAO.save(entity);
     }
 
     @Override
-    public void update(NotificationEntity entity) {
+    public void update(Notification entity) {
         notificationDAO.save(entity);
     }
 
-    public void save(NotificationEntity entity) {  notificationDAO.save(entity);  }
+    public void save(Notification entity) {  notificationDAO.save(entity);  }
 
-    public NotificationEntity get(ObjectId id) {
+    public Notification get(ObjectId id) {
         return notificationDAO.get(id);
     }
 
-    public List<NotificationEntity> getAll() {
+    public List<Notification> getAll() {
         return notificationDAO.getAll();
     }
 

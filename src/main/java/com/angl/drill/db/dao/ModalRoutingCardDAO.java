@@ -1,17 +1,17 @@
 package com.angl.drill.db.dao;
 
-import com.angl.drill.db.entity.ModalRoutingCardEntity;
+import com.angl.drill.db.entity.ModalRoutingCard;
 import org.bson.types.ObjectId;
 
 import java.util.List;
 
 public interface ModalRoutingCardDAO {
 
-    void save(ModalRoutingCardEntity entity);
+    void save(ModalRoutingCard entity);
 
-    ModalRoutingCardEntity get(ObjectId id);
+    ModalRoutingCard get(ObjectId id);
 
-    List<ModalRoutingCardEntity> getAll();
+    List<ModalRoutingCard> getAll();
 
     void remove(ObjectId id);
 }

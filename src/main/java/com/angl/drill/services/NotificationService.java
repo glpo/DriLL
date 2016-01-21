@@ -1,18 +1,18 @@
 package com.angl.drill.services;
 
-import com.angl.drill.db.entity.NotificationEntity;
+import com.angl.drill.db.entity.Notification;
 import org.bson.types.ObjectId;
 
 import java.util.List;
 
 public interface NotificationService {
-    void add(NotificationEntity entity);
+    void add(Notification entity);
 
-    void update(NotificationEntity entity);
+    void update(Notification entity);
 
-    NotificationEntity get(ObjectId id);
+    Notification get(ObjectId id);
 
-    List<NotificationEntity> getAll();
+    List<Notification> getAll();
 
     void remove(ObjectId id);
 }

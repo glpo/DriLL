@@ -1,18 +1,18 @@
 package com.angl.drill.services;
 
-import com.angl.drill.db.entity.UserEntity;
+import com.angl.drill.db.entity.User;
 import org.bson.types.ObjectId;
 
 import java.util.List;
 
 public interface UserService {
-    void add(UserEntity entity);
+    void add(User entity);
 
-    void update(UserEntity entity);
+    void update(User entity);
 
-    UserEntity get(ObjectId id);
+    User get(ObjectId id);
 
-    List<UserEntity> getAll();
+    List<User> getAll();
 
     void remove(ObjectId id);
 }

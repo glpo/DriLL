@@ -1,8 +1,7 @@
 package com.angl.drill.services.impl;
 
 import com.angl.drill.db.dao.ExcavationDAO;
-import com.angl.drill.db.entity.ExcavationEntity;
-import com.angl.drill.db.entity.ExcavationSessionEntity;
+import com.angl.drill.db.entity.ExcavationSession;
 import com.angl.drill.services.ExcavationService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +16,19 @@ public class ExcavationServiceImpl implements ExcavationService {
     @Autowired
     private ExcavationDAO excavationDAO;
 
-    public void add(ExcavationSessionEntity entity) {
+    public void add(ExcavationSession entity) {
         excavationDAO.save(entity);
     }
 
-    public void update(ExcavationSessionEntity entity) {
+    public void update(ExcavationSession entity) {
         excavationDAO.save(entity);
     }
 
-    public ExcavationSessionEntity get(ObjectId id) {
+    public ExcavationSession get(ObjectId id) {
         return excavationDAO.get(id);
     }
 
-    public List<ExcavationSessionEntity> getAll() {
+    public List<ExcavationSession> getAll() {
         return excavationDAO.getAll();
     }
 

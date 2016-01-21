@@ -1,6 +1,5 @@
 package com.angl.drill.mvc.controllers;
 
-import com.angl.drill.db.entity.ExcavationSessionEntity;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

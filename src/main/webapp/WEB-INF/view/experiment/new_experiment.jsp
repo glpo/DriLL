@@ -15,21 +15,53 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-6">
-                    <form role="form">
+                    <form role="form" method="post" action="/drill/experiment/create">
                         <div class="form-group">
                             <label>Experiment Name</label>
-                            <input class="form-control" placeholder="Enter experiment name">
+                            <input class="form-control" placeholder="Enter experiment name" name="name">
                             <label class="checkbox-inline">
-                                <input type="checkbox">Auto generate name
+                                <input type="checkbox" name="autoGenerate">Auto generate name
                             </label>
                         </div>
                         <div class="form-group">
-                            <label>Attach drilling doc</label>
-                            <input type="file">
+                            <label>Load - F</label>
+                            <input class="form-control" placeholder="Enter load value" name="bitLoad">
                         </div>
+
                         <div class="form-group">
-                            <label>Additional Comment</label>
-                            <textarea class="form-control" rows="3"></textarea>
+                            <label>Delta Load - dF</label>
+                            <input class="form-control" placeholder="Enter delta load value" name="bitDeltaLoad">
+                        </div>
+
+                        <div class="form-group">
+                             <label>Cost Of Work (per hour)</label>
+                             <input class="form-control" placeholder="Enter work hour cost" name="costPerHour">
+                        </div>
+
+                        <div class="form-group">
+                             <label>Bit cost</label>
+                             <input class="form-control" placeholder="Enter bit cost" name="bitCost">
+                        </div>
+
+                        <div class="form-group">
+                             <label>Descent/Ascent Time</label>
+                             <input class="form-control" placeholder="Enter descent/ascent time" name="descAscTime">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Break By</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="breakBy" value="Time">Time
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                     <input type="radio" name="breakBy" value="Excavation">Excavation
+                                </label>
+                            </div>
+                                <label>Break Parameter Value</label>
+                                <input class="form-control" placeholder="Enter Break Parameter Value (minuets/miters)" name="breakParamValue">
                         </div>
 
                         <button type="submit" class="btn btn-default">Create</button>

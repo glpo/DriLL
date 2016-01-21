@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
-@Document(collection = ExcavationSessionEntity.EXCAVATION_SESSION_COLLECTION_NAME)
-public class ExcavationSessionEntity {
+@Document(collection = ExcavationSession.EXCAVATION_SESSION_COLLECTION_NAME)
+public class ExcavationSession {
     public static final String EXCAVATION_SESSION_COLLECTION_NAME = "excavation_sessions";
 
     @Id
