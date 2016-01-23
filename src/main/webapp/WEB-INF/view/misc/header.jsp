@@ -52,11 +52,15 @@
 
         <script src="resources/js/excanvas.min.js"></script>
 
+        <script src="resources/js/jquery.flot.js"></script>
         <script src="resources/js/jquery.flot.pie.js"></script>
         <script src="resources/js/jquery.flot.resize.js"></script>
         <script src="resources/js/jquery.flot.time.js"></script>
         <script src="resources/js/jquery.flot.tooltip.min.js"></script>
         <script src="resources/js/flot-data.js"></script>
+
+
+
 </head>
 <body>
     <div id="wrapper">
