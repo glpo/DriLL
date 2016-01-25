@@ -76,6 +76,13 @@
                 <a class="navbar-brand" href="index.html">Drill</a>
             </div>
             <!-- /.navbar-header -->
+
+            <a class="nav navbar-top-links navbar-right" href="/drill/drillholes/id/${currentHole.id}">
+                 <c:if test="${not empty currentHole}">
+                    <p class="fa fa-map-marker">${currentHole.name}</p>
+                 </c:if>
+            </a>
+
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">

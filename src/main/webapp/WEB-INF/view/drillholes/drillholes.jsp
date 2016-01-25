@@ -9,8 +9,8 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-               <form method="POST" action="/drill/drillholes/create">
-                   <button type="button" class="btn btn-outline btn-primary">Create New</button>
+               <form method="GET" action="/drill/drillholes/create">
+                   <button type="submit" class="btn btn-outline btn-primary">Create New</button>
               </form>
             </div>
             <!-- /.panel-heading -->
@@ -25,7 +25,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Drill-Hole</th>
+                                <th>Drill-Hole Name</th>
+                                <th>Location</th>
+                                <th>Select Primary</th>
                                 <th>Operations</th>
                             </tr>
                         </thead>
@@ -36,11 +38,25 @@
                                         <td>${hole.name}</td>
                                         <td>${hole.location}</td>
                                         <td>
-                                            <a href="drillholes/edit/id/${hole.id}" id="${hole.id}">
+                                            <c:choose>
+                                                <c:when test = "${hole.id eq currentHole.id}">
+                                                    <a href="unselectPrimary/id/${hole.id}">
+                                                        <p class="fa fa-times-circle">Unselect As Primary</p>
+                                                    </a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="selectPrimary/id/${hole.id}">
+                                                        <p class="fa fa-check">Select As Primary</p>
+                                                    </a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>
+                                            <a href="edit/id/${hole.id}" id="${hole.id}">
                                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                             </a>
                                              |
-                                            <a class="confirm" href="drillholes/delete/id/${hole.id}" id="${hole.id}">
+                                            <a href="delete/id/${hole.id}" id="${hole.id}">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                             </a>
                                         </td>

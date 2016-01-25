@@ -1,6 +1,7 @@
 package com.angl.drill.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,14 +11,18 @@ public class DrillHole {
 
     @Id
     @JsonIgnore
-    String objectId;
+    private ObjectId id;
 
     private String name;
 
     private String location;
 
-    public String getObjectId() {
-        return objectId;
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public ObjectId getId() {
+        return id;
     }
 
     public String getName() {
