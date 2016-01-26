@@ -16,17 +16,25 @@
     <mvc:annotation-driven/>
     <mvc:view-controller path="/" view-name="login" />
 
+
     <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/dashboard/resources/**" location="/resources/" />
     <mvc:resources mapping="/routing/resources/**" location="/resources/" />
     <mvc:resources mapping="/params/resources/**" location="/resources/" />
+    <mvc:resources mapping="/view/resources/**" location="/resources/" />
+    <mvc:resources mapping="/drill/resources/**" location="/resources/" />
+
     <mvc:resources mapping="/experiment/resources/**" location="/resources/" />
+    <mvc:resources mapping="/experiment/edit/id/resources/**" location="/resources/" />
+
     <mvc:resources mapping="/excavation/resources/**" location="/resources/" />
     <mvc:resources mapping="/excavation/edit/id/resources/**" location="/resources/" />
     <mvc:resources mapping="/excavation/delete/id/resources/**" location="/resources/" />
-    <mvc:resources mapping="/dashboard/resources/**" location="/resources/" />
-    <mvc:resources mapping="/view/resources/**" location="/resources/" />
-    <mvc:resources mapping="/drill/resources/**" location="/resources/" />
+
     <mvc:resources mapping="/drillholes/resources/**" location="/resources/" />
+    <mvc:resources mapping="/drillholes/edit/id/resources/**" location="/resources/" />
+    <mvc:resources mapping="/drillholes/id/resources/**" location="/resources/" />
+
     <mvc:resources mapping="/reports/resources/**" location="/resources/" />
 
 

@@ -1,14 +1,18 @@
 package com.angl.drill.mvc.controllers;
 
+import com.angl.drill.db.entity.DrillHole;
 import com.angl.drill.db.entity.Experiment;
 import com.angl.drill.services.ExcavationService;
 import com.angl.drill.services.ExperimentService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +26,7 @@ public class ExperimentsController {
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
     public String getExperimentsHistory(ModelMap model) {
-        //
-        List<String> experiments = new ArrayList<String>();
-        experiments.add("Experiment #1.1 20.12.15 15:44");
-        experiments.add("Experiment #1.2 20.12.15 16:27");
-        experiments.add("Experiment #1.3 20.12.15 16:51");
-        experiments.add("Experiment #2.1 21.12.15 10:44");
-        experiments.add("Experiment #2.2 21.12.15 13:44");
-        experiments.add("Experiment #2.3 21.12.15 11:44");
-        experiments.add("Experiment #3.1 22.12.15 12:44");
+        List<Experiment> experiments = experimentService.getAll();
 
         model.put("experiments", experiments);
 
@@ -68,6 +64,32 @@ public class ExperimentsController {
         modelMap.put("experiment", experiment);
 
         return "/experiment/make_experiment";
+    }
+
+    @RequestMapping(value = "/edit/id/{id}", method = RequestMethod.GET)
+    public String getExperimentForEdit(@PathVariable("id") ObjectId id, ModelMap model){
+        Experiment experiment = experimentService.get(id);
+
+        model.put("experiment", experiment);
+
+        return "experiment/edit_experiment";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String saveExperimentAfterEdit(@PathVariable("id") ObjectId id, ModelMap model){
+                
+
+        return "experiment/edit_experiment";
+    }
+
+    @RequestMapping(value = "/delete/id/{id}", method = RequestMethod.GET)
+    public String deleteSelectedExperiment(@PathVariable("id") ObjectId id, RedirectAttributes redirectAttributes){
+        Experiment experiment = experimentService.get(id);
+        experimentService.remove(id);
+
+        redirectAttributes.addFlashAttribute("message", "Experiment " + experiment.getName() + " Deleted Successfully");
+
+        return "redirect:/experiment/history";
     }
 
 }
