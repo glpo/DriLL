@@ -20,6 +20,7 @@
                 </c:if>
                 <div class="dataTable_wrapper">
                 <form action="/drill/experiment/edit" method="post">
+                    <input value="${id}" name="id" type="hidden">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
@@ -29,28 +30,28 @@
                         </thead>
                         <tbody>
                             <tr class="odd gradeX">
-                                <td>Name: </td> <td>${experiment.name}</td>
+                                <td>Name: </td> <td><input class="form-control" value="${experiment.name}" name="name"></td>
                             </tr>
                             <tr class="odd gradeX">
-                                <td>Bit Load: </td> <td>${experiment.bitLoad}</td>
+                                <td>Bit Load: </td> <td><input class="form-control" value="${experiment.bitLoad}" name="bitLoad"></td>
                             </tr>
                             <tr class="odd gradeX">
-                                <td>Bit Delta Load: </td> <td>${experiment.bitDeltaLoad}</td>
+                                <td>Bit Delta Load: </td> <td><input class="form-control" value="${experiment.bitDeltaLoad}" name="bitDeltaLoad"></td>
                             </tr>
                             <tr class="odd gradeX">
-                                <td>Cost Per Hour: </td> <td>${experiment.costPerHour}</td>
+                                <td>Cost Per Hour: </td> <td><input class="form-control" value="${experiment.costPerHour}" name="costPerHour"></td>
                             </tr>
                             <tr class="odd gradeX">
-                                <td>Bit Cost: </td> <td>${experiment.bitCost}</td>
+                                <td>Bit Cost: </td> <td><input class="form-control" value="${experiment.bitCost}" name="bitCost"></td>
                             </tr>
                             <tr class="odd gradeX">
-                                <td>Desc/Asc Time: </td> <td>${experiment.descAscTime}</td>
+                                <td>Desc/Asc Time: </td> <td><input class="form-control" value="${experiment.descAscTime}" name="descAscTime"></td>
                             </tr>
                             <tr class="odd gradeX">
-                                <td>Break By: </td> <td>${experiment.breakBy}</td>
+                                <td>Break By: </td> <td><input class="form-control" value="${experiment.breakBy}" name="breakBy"></td>
                             </tr>
                             <tr class="odd gradeX">
-                                <td>Break Param Value: </td> <td>${experiment.breakParamValue}</td>
+                                <td>Break Param Value: </td> <td><input class="form-control" value="${experiment.breakParamValue}" name="breakParamValue"></td>
                             </tr>
                         </tbody>
                     </table>

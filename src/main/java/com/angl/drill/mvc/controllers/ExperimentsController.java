@@ -8,10 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -38,7 +35,7 @@ public class ExperimentsController {
         return "/experiment/new_experiment";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)  //@RequestParams can be replaced with @ModelAttribute
     public String createNewExperiment(@RequestParam(name = "name")              String experimentName,
                                       @RequestParam(name = "breakBy")           String breakBy,
                                       @RequestParam(name = "bitLoad")           int bitLoad,
@@ -76,10 +73,11 @@ public class ExperimentsController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String saveExperimentAfterEdit(@PathVariable("id") ObjectId id, ModelMap model){
-                
+    public String saveExperimentAfterEdit(@ModelAttribute("experiment") Experiment updExperiment, RedirectAttributes redirectAttributes){
+        experimentService.update(updExperiment);
+        redirectAttributes.addFlashAttribute("message", "Experiment " + updExperiment.getName() + " Updated Successfully");
 
-        return "experiment/edit_experiment";
+        return "redirect:/experiment/history";
     }
 
     @RequestMapping(value = "/delete/id/{id}", method = RequestMethod.GET)
