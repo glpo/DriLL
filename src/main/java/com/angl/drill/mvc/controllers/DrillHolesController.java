@@ -94,7 +94,8 @@ public class DrillHolesController {
     }
 
     @RequestMapping(value = "/selectPrimary/id/{id}", method = RequestMethod.GET)
-    public String selectPrimaryHole(@PathVariable("id") ObjectId id, RedirectAttributes redirectAttributes, HttpSession httpSession) {
+    public String selectPrimaryHole(@PathVariable("id") ObjectId id, RedirectAttributes redirectAttributes,
+                                    HttpSession httpSession) {
         DrillHole hole = drillHoleService.get(id);
 
         httpSession.setAttribute("currentHole", hole);
@@ -105,7 +106,7 @@ public class DrillHolesController {
 
     @RequestMapping(value = "/unselectPrimary/id/{id}", method = RequestMethod.GET)
     public String unselectPrimaryHole(@PathVariable("id") ObjectId id, RedirectAttributes redirectAttributes,
-                                      HttpSession httpSession, SessionStatus sessionStatus) {
+                                      SessionStatus sessionStatus) {
         DrillHole hole = drillHoleService.get(id);
 
         sessionStatus.setComplete();

@@ -11,28 +11,41 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping(value = "/experiment")
+@SessionAttributes(names = "currentHole")
 public class ExperimentsController {
 
     @Autowired
     ExperimentService experimentService;
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
-    public String getExperimentsHistory(ModelMap model) {
-        List<Experiment> experiments = experimentService.getAll();
+    public String getExperimentsHistory(ModelMap model, HttpSession session) {
+        DrillHole selectedDrillHole = (DrillHole) session.getAttribute("currentHole");
+        if(selectedDrillHole != null) {
+            List<Experiment> experiments = experimentService.getAll();
 
-        model.put("experiments", experiments);
+            model.put("experiments", experiments);
+        } else {
+            model.put("message", "Please, select a Drill-Hole");
+        }
 
         return "/experiment/experiments";
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String getNewExperimentPage(ModelMap model) {
-        return "/experiment/new_experiment";
+    public String getNewExperimentPage(ModelMap model, HttpSession session, RedirectAttributes redirectAttributes) {
+        DrillHole selectedDrillHole = (DrillHole) session.getAttribute("currentHole");
+        if(selectedDrillHole != null) {
+            return "/experiment/new_experiment";
+        }
+        redirectAttributes.addFlashAttribute("message", "Please, select a Drill-Hole.");
+
+        return "redirect:/experiment/history";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)  //@RequestParams can be replaced with @ModelAttribute
