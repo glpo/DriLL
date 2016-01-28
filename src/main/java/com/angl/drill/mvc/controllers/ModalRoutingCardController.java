@@ -13,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/routing")
@@ -28,19 +30,12 @@ public class ModalRoutingCardController {
         ModalRoutingCard entity = new ModalRoutingCard();
 
         entity.setName("Routing Card #1 loollffooolo 324423 asdada");
-      /*  entity.setDepth(Arrays.asList(100, 200, 300, 400, 500, 600, 700));
+        entity.setDepth(Arrays.asList(100, 200, 300, 400, 500, 600, 700));
         entity.setLitology(null);
         entity.setConstans(Arrays.asList("K,470", "K2,1", "J 1690", "T, 2445", "P1, 2675", "C, 3120"));
         entity.setConstruction(Arrays.asList("426 mm", "324 mm", "245 mm", "146 mm", "148 mm"));
         entity.setComplications(Arrays.asList("Poglinannya 23423423", "Osipannya 34535345", "4353453535", "3453453543", "345345345345", "345345345345345435", "3453453453454353534534"));
         entity.setBitSize(Arrays.asList("23423", "324234", "234234", "23423432", "53533"));
-        entity.set
-        entity.set
-        entity.set
-        entity.set
-        entity.set
-        entity.set
-        entity.set*/
 
         return new ModelAndView("/routing/routing_card", "card", Collections.singletonList(entity));
     }
@@ -48,8 +43,19 @@ public class ModalRoutingCardController {
     @RequestMapping(value = "/allCards", method = RequestMethod.GET)
     public ModelAndView getAllRoutingCards() {
         //List<ModalRoutingCard> routingCards = modalRoutingCardService.getAll();
+        ModalRoutingCard entity = new ModalRoutingCard();
 
-        return new ModelAndView("/routing/all_cards", "routingCards", null);
+        entity.setName("Routing Card #1 loollffooolo 324423 asdada");
+        entity.setDepth(Arrays.asList(100, 200, 300, 400, 500, 600, 700));
+        entity.setLitology(null);
+        entity.setConstans(Arrays.asList("K,470", "K2,1", "J 1690", "T, 2445", "P1, 2675", "C, 3120"));
+        entity.setConstruction(Arrays.asList("426 mm", "324 mm", "245 mm", "146 mm", "148 mm"));
+        entity.setComplications(Arrays.asList("Poglinannya 23423423", "Osipannya 34535345", "4353453535", "3453453543", "345345345345", "345345345345345435", "3453453453454353534534"));
+        entity.setBitSize(Arrays.asList("23423", "324234", "234234", "23423432", "53533"));
+
+        List<ModalRoutingCard> routingCards =  Collections.singletonList(entity);
+
+        return new ModelAndView("/routing/all_cards", "routingCards", routingCards);
     }
 
     @RequestMapping(value = { "/edit/id/{id}"}, method = RequestMethod.GET)

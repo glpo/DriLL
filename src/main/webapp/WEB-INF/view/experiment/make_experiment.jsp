@@ -21,9 +21,17 @@
                              <label>Cost Per Hour: </label>${experiment.costPerHour} <br>
                              <label>Bit Cost: </label>${experiment.bitCost} <br>
                              <label>Desc/Asc Time: </label>${experiment.descAscTime} <br>
-                             <label>Stop process By: </label>${experiment.breakBy} <br>
-                             <label>Stop param value: </label>${experiment.breakParamValue} <br>
+                             <label>Stop process By: </label>${experiment.breakBy} <label>Stop param value: </label>${experiment.breakParamValue}
                     </c:if>
+                     <div id="content">
+                           <div class="demo-container">
+                               <div id="placeholder" class="demo-placeholder"></div>
+                           </div>
+                           <p>
+                                <button type="button" class="btn btn-outline btn-primary" id="startBtn">Start Process</button>
+                                <button type="button" class="btn btn-outline btn-primary" id="stopBtn" style="display: none;">Stop Process</button>
+                           </p>
+                       </div>
                 </div>
             </div>
             <!-- /.row (nested) -->

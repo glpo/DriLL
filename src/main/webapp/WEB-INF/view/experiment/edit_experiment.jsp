@@ -20,7 +20,7 @@
                 </c:if>
                 <div class="dataTable_wrapper">
                 <form action="/drill/experiment/edit" method="post">
-                    <input value="${id}" name="id" type="hidden">
+                    <input value="${experiment.id}" name="id" type="hidden">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>

@@ -1,6 +1,7 @@
 package com.angl.drill.mvc.controllers;
 
 import com.angl.drill.db.entity.DrillHole;
+import com.angl.drill.db.entity.Experiment;
 import com.angl.drill.services.DrillHoleService;
 import org.apache.commons.lang.StringUtils;
 import org.bson.types.ObjectId;
@@ -68,10 +69,19 @@ public class DrillHolesController {
     public String getDrillHoleForEdit(@PathVariable("id") ObjectId id, ModelMap model){
         DrillHole drillHole = drillHoleService.get(id);
 
-        model.put("drillHole", drillHole);
+        model.put("hole", drillHole);
 
         return "drillholes/edit_drillhole";
     }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String saveDrillHoleAfterEdit(@ModelAttribute("hole") DrillHole drillHole, RedirectAttributes redirectAttributes){
+        drillHoleService.update(drillHole);
+        redirectAttributes.addFlashAttribute("message", "Drill-Hole " + drillHole.getName() + " Updated Successfully");
+
+        return "redirect:/drillholes/all";
+    }
+
 
     @RequestMapping(value = "/delete/id/{id}", method = RequestMethod.GET)
     public String deleteSelectedDrillHole(@PathVariable("id") ObjectId id, RedirectAttributes redirectAttributes){

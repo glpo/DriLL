@@ -29,7 +29,7 @@ public class ExcavationFlotController {
 
     @RequestMapping(value = "/realtime", method = RequestMethod.GET)
     public String getRealTimeFlot(){
-        return "excavation/flot";
+        return "excavation/realtime_excavation";
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
