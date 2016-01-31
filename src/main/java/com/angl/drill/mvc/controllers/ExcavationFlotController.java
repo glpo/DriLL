@@ -1,5 +1,6 @@
 package com.angl.drill.mvc.controllers;
 
+import com.angl.drill.algorithm.layer.LayersChangingIdentification;
 import com.angl.drill.db.entity.Excavation;
 import com.angl.drill.db.entity.ExcavationSession;
 import com.angl.drill.services.ExcavationService;
@@ -104,5 +105,14 @@ public class ExcavationFlotController {
         }
 
         return "excavation/exc_edit";
+    }
+
+    @RequestMapping(value = "/check_layer", method = RequestMethod.POST)
+    public String checkLayer(ModelMap model){
+        ExcavationSession sessionEntity = excavationService.getAll().get(0);
+        boolean isChange = LayersChangingIdentification.idefPlast(sessionEntity.getExcavation());
+        model.put("isChange", isChange);
+
+        return "excavation/realtime_excavation";
     }
 }

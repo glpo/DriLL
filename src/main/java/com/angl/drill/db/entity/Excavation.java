@@ -5,7 +5,7 @@ import java.util.Date;
 public class Excavation {
 
     private Date time;
-    private int exc;
+    private double exc;
 
     public Excavation() {
     }
@@ -15,7 +15,7 @@ public class Excavation {
         this.time = time;
     }
 
-    public int getExc() {
+    public double getExc() {
         return exc;
     }
 

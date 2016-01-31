@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Real-time excavation process</h1>
+      <h1 class="page-header">Real-time excavation processfghfjhfh</h1>
     </div>
 </div>
 
@@ -32,6 +32,10 @@
             <button type="button" class="btn btn-outline btn-primary" id="startBtn">Start Process</button>
             <button type="button" class="btn btn-outline btn-primary" id="stopBtn" style="display: none;">Stop Process</button>
        </p>
+       ${isChange}
+       <form method="POST" action="/drill/excavation/check_layer">
+           <button type="submit" class="btn btn-default">Check layer</button>
+       </form>
    </div>
    <!-- /.panel-body -->
 </div>

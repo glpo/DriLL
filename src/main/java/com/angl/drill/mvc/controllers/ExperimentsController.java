@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@org.springframework.stereotype.Controller
 @RequestMapping(value = "/experiment")
 @SessionAttributes(names = "currentHole")
 public class ExperimentsController {
