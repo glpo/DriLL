@@ -28,6 +28,11 @@ public class ExcavationSession {
         return excavation;
     }
 
+    private double drillSpeed;
+    private double wearRate;
+    private double predictableCost;
+    private double bitLoad;
+
     public int getSessionNumber() {
         return sessionNumber;
     }
@@ -55,4 +60,20 @@ public class ExcavationSession {
     public void setId(ObjectId id) {
         this.id = id;
     }
+
+    public double getDrillSpeed(){ return drillSpeed; }
+
+    public double wearRate(){ return wearRate; }
+    public void setDrillSpeed(double drillSpeed) { this.drillSpeed = drillSpeed; }
+
+    public void setWearRate(double wearRate) { this.wearRate = wearRate; }
+
+    public double getPredictableCost() { return predictableCost; }
+
+    public void setPredictableCost(double cost) { this.predictableCost = predictableCost; }
+
+    public double getBitLoad() { return bitLoad; }
+
+    public void setBitLoad(double bitLoad) { this.bitLoad = bitLoad; }
+
 }

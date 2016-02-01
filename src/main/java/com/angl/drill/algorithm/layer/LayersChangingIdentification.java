@@ -72,7 +72,7 @@ public class LayersChangingIdentification {
             double gt = Math.pow(xn - keSred, 2);
             Gt = Math.sqrt(1 - (1 / i)) * Gt + (gt - keDispersia) / (Math.sqrt(2 * i) * keDispersia);
         }
-        if(Gt>2.5) return true;
+        if (Gt > 2.5) return true;
         return false;
     }
 
