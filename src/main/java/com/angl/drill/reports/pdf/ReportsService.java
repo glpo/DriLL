@@ -25,9 +25,11 @@ public class ReportsService {
 
             Paragraph description = new Paragraph("Breed Report #36 " + new Date());
 
+            PdfPTable table = createBreedTable();
 
             document.add(header);
             document.add(description);
+            document.add(table);
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -78,7 +80,6 @@ public class ReportsService {
             document.add(header);
             document.add(description);
             document.add(table);
-
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
