@@ -29,10 +29,6 @@ public class LayersChangingIdentification {
         return l * (l - 1) * tprev * tprev * Math.pow((1 + x * tprev), l - 2);
     }
 
-    public static void main(String[] args) {
-
-    }
-
     public static boolean idefPlast(List<Excavation> excavations) {
         List<Double> ke = new ArrayList<Double>();
         double ksred;
