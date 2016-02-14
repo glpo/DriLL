@@ -16,4 +16,6 @@ public interface ExcavationService {
     List<ExcavationSession> getAll();
 
     void remove(ObjectId id);
+
+
 }

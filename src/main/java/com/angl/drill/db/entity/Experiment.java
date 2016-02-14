@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = Experiment.EXPERIMENT_COLLECTION_NAME)
 public class Experiment {
@@ -15,19 +16,37 @@ public class Experiment {
 
     private String name;
 
+    @Field(value = "break_by")
     private String breakBy;
 
+    @Field(value = "bit_load")
     private int bitLoad;
 
+    @Field(value = "delta_load")
     private int bitDeltaLoad;
 
+    @Field(value = "per_hour")
     private int costPerHour;
 
+    @Field(value = "bit_cost")
     private int bitCost;
 
+    @Field(value = "desc_asc_time")
     private int descAscTime;
 
+    @Field(value = "break_param_val")
     private int breakParamValue;
+
+    @Field(value = "session")
+    private ObjectId sessionId;
+
+    public ObjectId getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(ObjectId sessionId) {
+        this.sessionId = sessionId;
+    }
 
     public ObjectId getId() {
         return id;
