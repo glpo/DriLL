@@ -1,6 +1,7 @@
 package com.angl.drill.mvc.controllers;
 
 import com.angl.drill.db.entity.DrillHole;
+import com.angl.drill.db.entity.ExcavationSession;
 import com.angl.drill.db.entity.Experiment;
 import com.angl.drill.services.ExcavationService;
 import com.angl.drill.services.ExperimentService;
@@ -17,11 +18,14 @@ import java.util.List;
 
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/experiment")
-@SessionAttributes(names = "currentHole")
+@SessionAttributes(names = "currentHole, excavationSession")
 public class ExperimentsController {
 
     @Autowired
     ExperimentService experimentService;
+
+    @Autowired
+    ExcavationService excavationService;
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
     public String getExperimentsHistory(ModelMap model, HttpSession session) {
@@ -41,6 +45,14 @@ public class ExperimentsController {
     public String getNewExperimentPage(ModelMap model, HttpSession session, RedirectAttributes redirectAttributes) {
         DrillHole selectedDrillHole = (DrillHole) session.getAttribute("currentHole");
         if(selectedDrillHole != null) {
+            ExcavationSession excavationSession = new ExcavationSession();
+            excavationSession.setDrillHoleId(selectedDrillHole.getId());
+            excavationSession.setIsExperiment(true);
+
+            excavationService.add(excavationSession);
+
+            session.setAttribute("excavationSession", excavationSession);
+
             return "/experiment/new_experiment";
         }
         redirectAttributes.addFlashAttribute("message", "Please, select a Drill-Hole.");
@@ -57,21 +69,25 @@ public class ExperimentsController {
                                       @RequestParam(name = "bitCost")           int bitCost,
                                       @RequestParam(name = "descAscTime")       int descAscTime,
                                       @RequestParam(name = "breakParamValue")   int breakParamValue,
-                                      ModelMap modelMap) {
+                                      ModelMap modelMap, HttpSession session) {
+        ExcavationSession excavationSession = (ExcavationSession) session.getAttribute("excavationSession");
 
-        Experiment experiment = new Experiment();
-        experiment.setName(experimentName);
-        experiment.setBreakBy(breakBy);
-        experiment.setBitLoad(bitLoad);
-        experiment.setBitDeltaLoad(bitDeltaLoad);
-        experiment.setCostPerHour(costPerHour);
-        experiment.setBitCost(bitCost);
-        experiment.setDescAscTime(descAscTime);
-        experiment.setBreakParamValue(breakParamValue);
+        if(excavationSession != null) {
+            Experiment experiment = new Experiment();
+            experiment.setName(experimentName);
+            experiment.setBreakBy(breakBy);
+            experiment.setBitLoad(bitLoad);
+            experiment.setBitDeltaLoad(bitDeltaLoad);
+            experiment.setCostPerHour(costPerHour);
+            experiment.setBitCost(bitCost);
+            experiment.setDescAscTime(descAscTime);
+            experiment.setBreakParamValue(breakParamValue);
+            experiment.setSessionId(excavationSession.getId());
 
-        experimentService.add(experiment);
+            experimentService.add(experiment);
 
-        modelMap.put("experiment", experiment);
+            modelMap.put("experiment", experiment);
+        }
 
         return "/experiment/make_experiment";
     }

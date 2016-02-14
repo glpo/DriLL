@@ -1,6 +1,7 @@
 package com.angl.drill.mvc.controllers;
 
 import com.angl.drill.algorithm.layer.LayersChangingIdentification;
+import com.angl.drill.db.entity.DrillHole;
 import com.angl.drill.db.entity.Excavation;
 import com.angl.drill.db.entity.ExcavationSession;
 import com.angl.drill.services.ExcavationService;
@@ -11,8 +12,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -29,8 +32,20 @@ public class ExcavationFlotController {
     }
 
     @RequestMapping(value = "/realtime", method = RequestMethod.GET)
-    public String getRealTimeFlot(){
-        return "excavation/realtime_excavation";
+    public String getRealTimeFlot(HttpSession session, ModelMap model) {
+        DrillHole drillHole = (DrillHole) session.getAttribute("currentHole");
+
+        if (drillHole == null) {
+            model.put("message", "Drill-Hole is not selected. Please, select a Drill-Hole.");
+        } else {
+            ExcavationSession excavationSession = new ExcavationSession();
+            excavationSession.setDrillHoleId(drillHole.getId());
+            excavationSession.setIsExperiment(false);
+
+            excavationService.add(excavationSession);
+
+            session.setAttribute("excavationSession", excavationSession);
+        }
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
@@ -115,4 +130,38 @@ public class ExcavationFlotController {
 
         return "excavation/realtime_excavation";
     }
+
+        @RequestMapping(value = "/fetchData", method = RequestMethod.GET)
+        @ResponseBody
+        public List<String> fetchData(HttpSession session){
+            DrillHole drillHole = (DrillHole) session.getAttribute("currentHole");
+            ExcavationSession excavationSession = (ExcavationSession) session.getAttribute("excavationSession");
+
+            List<String> result = new ArrayList<String>();
+
+            if(drillHole != null && excavationSession != null) {
+                //List<Excavation> excavation = excavationService.get ... ;
+                result.add("14.4");
+                result.add("30.7");
+                result.add("45.8");
+                result.add("8.6");
+                result.add("20.5");
+                result.add("45.6");
+                result.add("50.9");
+                result.add("28.8");
+                result.add("54.4");
+                result.add("32.7");
+                result.add("12.8");
+                result.add("88.6");
+                result.add("25.5");
+                result.add("5.6");
+                result.add("50.9");
+                result.add("68.8");
+
+                return result;
+            }
+
+            //return "[[1, 14.4], [2, 30.7], [3, 45.8], [4, 8.6], [5, 20.5], [6, 45.6], [7, 50.9], [8, 28.8], [9, 65.0], [10, 8.1], [11, 100], [12, 10]]";
+            return Collections.EMPTY_LIST;
+        }
 }

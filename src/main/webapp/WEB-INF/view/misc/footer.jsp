@@ -1,101 +1,88 @@
    </div>
     <!-- /#wrapper -->
 
-     <script type="text/javascript">
+    <script type="text/javascript">
 
-                        var continueProcess = false;
+             var options = {
+        		series: {
+        			shadowSize: 2	// Drawing is faster without shadows
+        		},
+        		yaxis: {
+        			min: 0,
+        			max: 100
+        		},
+        		xaxis: {
+        			show: false
+        		}
+        	 };
 
-                      		var data = [],
-                      			totalPoints = 300;
+    		var continueProcess = false;
 
-                      		function getRandomData() {
+    		data = [[0, 0]];
 
-                      			if (data.length > 0)
-                      				data = data.slice(1);
+    		var oldData;
 
-                      			// Do a random walk
+        	var plot = $.plot("#placeholder", [data], options);
 
-                      			while (data.length < totalPoints) {
+        		function fetchData() {
 
-                      				var prev = data.length > 0 ? data[data.length - 1] : 50,
-                      					y = prev + Math.random() * 10 - 5;
+    				function onDataReceived(series) {
+    					//var oldData = plot.getData();
+    					var data = [];
 
-                      				if (y < 0) {
-                      					y = 0;
-                      				} else if (y > 100) {
-                      					y = 100;
-                      				}
-
-                      				data.push(y);
-                      			}
-
-                      			// Zip the generated y values with the x values
-
-                      			var res = [];
-                      			for (var i = 0; i < data.length; ++i) {
-                      				res.push([i, data[i]])
-                      			}
-
-                      			return res;
-                      		}
-
-                      		var updateInterval = 240;
-
-                      		$("#startBtn").click(function() {
-                                  update();
-                                  continueProcess = true;
-
-                                  $("#startBtn").hide();
-                                  $("#stopBtn").show();
-                      		});
-
-                      		$("#stopBtn").click(function() {
-                                  continueProcess = false;
-
-                                  $("#startBtn").show();
-                                  $("#stopBtn").hide();
-                              });
-
-                      		var plot = $.plot("#placeholder", [ getRandomData() ], {
-                      			series: {
-                      				shadowSize: 0	// Drawing is faster without shadows
-                      			},
-                      			yaxis: {
-                      				min: 0,
-                      				max: 100
-                      			},
-                      			xaxis: {
-                      				show: false
-                      			}
-                      		});
-
-                      		function update() {
-                      		    if(continueProcess) {
-                      			    plot.setData([getRandomData()]);
-                      		    }
-
-                      			plot.draw();
-                      			setTimeout(update, updateInterval);
-                      		}
-
-                              if(continueProcess) {
-                      		  update();
-                      		}
-
-            	function clearPlot() {
-                    $.plot("#placeholder", null, {
-                        series: {
-                            shadowSize: 0	// Drawing is faster without shadows
-                        },
-                        yaxis: {
-                            min: 0,
-                            max: 100
-                        },
-                        xaxis: {
-                            show: false
+    					var arrayLength = series.length;
+                        for (var i = 0; i < arrayLength; i++) {
+                           data.push([i, series[i]]);
                         }
-                    });
-                }
-    </script>
+
+    					plot = $.plot("#placeholder", [data], options);
+
+    					oldData = data;
+    				}
+
+    				$.ajax({
+    					url: "/drill/excavation/fetchData",
+    					type: "GET",
+    					contentType : "application/json",
+    					dataType: "json",
+    					success: onDataReceived,
+    					error: function(){
+    						alert('Error');
+    					}
+    				});
+        		}
+
+        		//setTimeout(fetchData, 1000);
+
+        		$("#startBtn").click(function() {
+        			  fetchData();
+        			  continueProcess = true;
+
+        			  $("#startBtn").hide();
+        			  $("#stopBtn").show();
+        		});
+
+        		$("#stopBtn").click(function() {
+        			  continueProcess = false;
+
+        			  $("#startBtn").show();
+        			  $("#stopBtn").hide();
+        		  });
+
+        		function clearPlot() {
+        			$.plot("#placeholder", null, {
+        				series: {
+        					shadowSize: 0	// Drawing is faster without shadows
+        				},
+        				yaxis: {
+        					min: 0,
+        					max: 100
+        				},
+        				xaxis: {
+        					show: false
+        				}
+        			});
+        		}
+            </script>
 </body>
 </html>

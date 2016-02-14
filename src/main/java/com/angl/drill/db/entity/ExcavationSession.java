@@ -22,17 +22,34 @@ public class ExcavationSession {
     @Field(value = "is_experiment")
     private boolean isExperiment;
 
+    @Field(value = "drill_speed")
+    private double drillSpeed;
+
+    @Field(value = "wear_rate")
+    private double wearRate;
+
+    @Field(value = "predictable_cost")
+    private double predictableCost;
+
+    @Field(value = "bit_load")
+    private double bitLoad;
+
+    @Field(value = "drill_hole")
+    private ObjectId drillHoleId;
+
+    public ObjectId getDrillHoleId() {
+        return drillHoleId;
+    }
+
+    public void setDrillHoleId(ObjectId drillHoleId) {
+        this.drillHoleId = drillHoleId;
+    }
+
     private List<Excavation> excavation;
 
     public List<Excavation> getExcavation() {
         return excavation;
     }
-
-    private double drillSpeed;
-    private double wearRate;
-    private double predictableCost;
-    private double bitLoad;
-
     public int getSessionNumber() {
         return sessionNumber;
     }

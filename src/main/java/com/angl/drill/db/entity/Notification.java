@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 
@@ -24,6 +25,17 @@ public class Notification {
     private Date date;
 
     private NotificationType type;
+
+    @Field(value = "session")
+    private ObjectId sessionId;
+
+    public ObjectId getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(ObjectId sessionId) {
+        this.sessionId = sessionId;
+    }
 
     public ObjectId getId() {
         return id;
