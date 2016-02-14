@@ -29,6 +29,10 @@ public class Experiment {
 
     private int breakParamValue;
 
+    private double optimumBitLoad;
+
+    private double predictableDrillCost;
+
     public ObjectId getId() {
         return id;
     }
@@ -100,4 +104,12 @@ public class Experiment {
     public void setBreakParamValue(int breakParamValue) {
         this.breakParamValue = breakParamValue;
     }
+
+    public double getOptimumBitLoad() { return optimumBitLoad; }
+
+    public void setOptimumBitLoad(double optimumBitLoad) { this.optimumBitLoad = optimumBitLoad; }
+
+    public double getPredictableDrillCost() { return predictableDrillCost; }
+
+    public void setPredictableDrillCost(double predictableDrillCost) { this.predictableDrillCost = predictableDrillCost; }
 }

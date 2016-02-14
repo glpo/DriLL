@@ -31,6 +31,7 @@ public class ExcavationSession {
     private double drillSpeed;
     private double wearRate;
     private double predictableCost;
+    private double predictableDrillTime;
     private double bitLoad;
 
     public int getSessionNumber() {
@@ -63,7 +64,7 @@ public class ExcavationSession {
 
     public double getDrillSpeed(){ return drillSpeed; }
 
-    public double wearRate(){ return wearRate; }
+    public double getWearRate(){ return wearRate; }
     public void setDrillSpeed(double drillSpeed) { this.drillSpeed = drillSpeed; }
 
     public void setWearRate(double wearRate) { this.wearRate = wearRate; }
@@ -75,5 +76,10 @@ public class ExcavationSession {
     public double getBitLoad() { return bitLoad; }
 
     public void setBitLoad(double bitLoad) { this.bitLoad = bitLoad; }
+
+    public double getPredictableDrillTime() { return predictableDrillTime; }
+
+    public void setPredictableDrillTime(double predictableDrillTime) { this.predictableDrillTime = predictableDrillTime; }
+
 
 }
