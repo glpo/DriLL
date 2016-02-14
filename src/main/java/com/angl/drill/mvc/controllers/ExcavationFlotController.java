@@ -46,6 +46,7 @@ public class ExcavationFlotController {
 
             session.setAttribute("excavationSession", excavationSession);
         }
+        return "excavation/realtime_excavation";
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
