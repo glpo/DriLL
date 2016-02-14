@@ -18,6 +18,7 @@ public class ReportsService {
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         try {
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(reportName));
+
             document.open();
 
             Paragraph header = createHeader();
