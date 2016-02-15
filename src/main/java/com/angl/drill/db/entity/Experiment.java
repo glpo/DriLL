@@ -37,6 +37,12 @@ public class Experiment {
     @Field(value = "break_param_val")
     private int breakParamValue;
 
+    @Field(value = "optimum_bit_load")
+    private double optimumBitLoad;
+
+    @Field(value = "predictable_drill_cost")
+    private double predictableDrillCost;
+
     @Field(value = "session")
     private ObjectId sessionId;
 
@@ -119,4 +125,12 @@ public class Experiment {
     public void setBreakParamValue(int breakParamValue) {
         this.breakParamValue = breakParamValue;
     }
+
+    public double getOptimumBitLoad() { return optimumBitLoad; }
+
+    public void setOptimumBitLoad(double optimumBitLoad) { this.optimumBitLoad = optimumBitLoad; }
+
+    public double getPredictableDrillCost() { return predictableDrillCost; }
+
+    public void setPredictableDrillCost(double predictableDrillCost) { this.predictableDrillCost = predictableDrillCost; }
 }
