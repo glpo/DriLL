@@ -132,37 +132,47 @@ public class ExcavationFlotController {
         return "excavation/realtime_excavation";
     }
 
-        @RequestMapping(value = "/fetchData", method = RequestMethod.GET)
-        @ResponseBody
-        public List<String> fetchData(HttpSession session){
-            DrillHole drillHole = (DrillHole) session.getAttribute("currentHole");
-            ExcavationSession excavationSession = (ExcavationSession) session.getAttribute("excavationSession");
+    @RequestMapping(value = "/fetchExcavationData", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Integer> fetchExcavationData(HttpSession session){
+        DrillHole drillHole = (DrillHole) session.getAttribute("currentHole");
+        ExcavationSession excavationSession = (ExcavationSession) session.getAttribute("excavationSession");
 
-            List<String> result = new ArrayList<String>();
+        List<Integer> result = new ArrayList<Integer>();
 
-            if(drillHole != null && excavationSession != null) {
-                //List<Excavation> excavation = excavationService.get ... ;
-                result.add("14.4");
-                result.add("30.7");
-                result.add("45.8");
-                result.add("8.6");
-                result.add("20.5");
-                result.add("45.6");
-                result.add("50.9");
-                result.add("28.8");
-                result.add("54.4");
-                result.add("32.7");
-                result.add("12.8");
-                result.add("88.6");
-                result.add("25.5");
-                result.add("5.6");
-                result.add("50.9");
-                result.add("68.8");
+        if(drillHole != null && excavationSession != null) {
+            //List<Excavation> excavation = excavationService.get ... ;
 
-                return result;
+            Random rand = new Random();
+            for(int i = 0; i < 1; i++) {
+                result.add(rand.nextInt(100));
             }
 
-            //return "[[1, 14.4], [2, 30.7], [3, 45.8], [4, 8.6], [5, 20.5], [6, 45.6], [7, 50.9], [8, 28.8], [9, 65.0], [10, 8.1], [11, 100], [12, 10]]";
-            return Collections.EMPTY_LIST;
+            return result;
         }
+        //return "[[1, 14.4], [2, 30.7], [3, 45.8], [4, 8.6], [5, 20.5], [6, 45.6], [7, 50.9], [8, 28.8], [9, 65.0], [10, 8.1], [11, 100], [12, 10]]";
+        return Collections.EMPTY_LIST;
+    }
+
+    @RequestMapping(value = "/fetchLoadData", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Integer> fetchLoadData(HttpSession session){
+        DrillHole drillHole = (DrillHole) session.getAttribute("currentHole");
+        ExcavationSession excavationSession = (ExcavationSession) session.getAttribute("excavationSession");
+
+        List<Integer> result = new ArrayList<Integer>();
+
+        if(drillHole != null && excavationSession != null) {
+            //List<Excavation> excavation = excavationService.get ... ;
+
+            Random rand = new Random();
+            for(int i = 0; i < 1; i++) {
+                result.add(70 + rand.nextInt(10));
+            }
+
+            return result;
+        }
+        //return "[[1, 14.4], [2, 30.7], [3, 45.8], [4, 8.6], [5, 20.5], [6, 45.6], [7, 50.9], [8, 28.8], [9, 65.0], [10, 8.1], [11, 100], [12, 10]]";
+        return Collections.EMPTY_LIST;
+    }
 }

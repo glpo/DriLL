@@ -4,3 +4,5 @@ drill.iml
 *.class
 target/drill.
 target/**
+breedReport_2016_02_03.pdf
+*.pdf

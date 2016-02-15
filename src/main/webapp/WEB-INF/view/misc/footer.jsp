@@ -1,88 +1,119 @@
    </div>
     <!-- /#wrapper -->
 
-    <script type="text/javascript">
+<script type="text/javascript">
+		 var options = {
+			series: {
+				shadowSize: 6
+			},
+			yaxis: {
+				min: 0,
+				max: 100
+			},
+			xaxis: {
+				min: 0,
+				max: 480
+			}
+		 };
 
-             var options = {
-        		series: {
-        			shadowSize: 2	// Drawing is faster without shadows
-        		},
-        		yaxis: {
-        			min: 0,
-        			max: 100
-        		},
-        		xaxis: {
-        			show: false
-        		}
-        	 };
+		var continueExcavationProcess;
+		var continueLoadProcess;
 
-    		var continueProcess = false;
+		var oldExcData = [[0,0]];
+		var oldLoadData = [[0,0]];
 
-    		data = [[0, 0]];
+		$.plot("#placeholder", [oldExcData], options);
+		$.plot("#placeholder2", [oldLoadData], options);
 
-    		var oldData;
+		function fetchExcavationData() {
 
-        	var plot = $.plot("#placeholder", [data], options);
+			function onDataReceived1(series) {
+				var data = [];
 
-        		function fetchData() {
+				var arrayLength = series.length;
+				var oldDataLength = oldExcData.length;
+				for (var i = 0; i < arrayLength; i++) {
+				   data.push([(oldDataLength + i) * 7, series[i]]);
+				}
 
-    				function onDataReceived(series) {
-    					//var oldData = plot.getData();
-    					var data = [];
+				var result = oldExcData.concat(data);
+				oldExcData = result;
 
-    					var arrayLength = series.length;
-                        for (var i = 0; i < arrayLength; i++) {
-                           data.push([i, series[i]]);
-                        }
+				$.plot("#placeholder", [result], options);
+			}
 
-    					plot = $.plot("#placeholder", [data], options);
+			$.ajax({
+				url: "/drill/excavation/fetchExcavationData",
+				type: "GET",
+				contentType : "application/json",
+				dataType: "json",
+				success: onDataReceived1,
+				error: function(){
+					alert('System Error. Please, contact administrator.');
+				}
+			});
 
-    					oldData = data;
-    				}
+			continueExcavationProcess = setTimeout(fetchExcavationData, 2000);
+		}
 
-    				$.ajax({
-    					url: "/drill/excavation/fetchData",
-    					type: "GET",
-    					contentType : "application/json",
-    					dataType: "json",
-    					success: onDataReceived,
-    					error: function(){
-    						alert('Error');
-    					}
-    				});
-        		}
+		function fetchLoadData() {
 
-        		//setTimeout(fetchData, 1000);
+        			function onDataReceived(series) {
+        				var data = [];
 
-        		$("#startBtn").click(function() {
-        			  fetchData();
-        			  continueProcess = true;
+        				var arrayLength = series.length;
+        				var oldDataLength = oldLoadData.length;
+        				for (var i = 0; i < arrayLength; i++) {
+        				   data.push([(oldDataLength + i) * 7, series[i]]);
+        				}
 
-        			  $("#startBtn").hide();
-        			  $("#stopBtn").show();
-        		});
+        				var result = oldLoadData.concat(data);
+        				oldLoadData = result;
 
-        		$("#stopBtn").click(function() {
-        			  continueProcess = false;
+        				$.plot("#placeholder2", [result], options);
+        			}
 
-        			  $("#startBtn").show();
-        			  $("#stopBtn").hide();
-        		  });
-
-        		function clearPlot() {
-        			$.plot("#placeholder", null, {
-        				series: {
-        					shadowSize: 0	// Drawing is faster without shadows
-        				},
-        				yaxis: {
-        					min: 0,
-        					max: 100
-        				},
-        				xaxis: {
-        					show: false
+        			$.ajax({
+        				url: "/drill/excavation/fetchLoadData",
+        				type: "GET",
+        				contentType : "application/json",
+        				dataType: "json",
+        				success: onDataReceived,
+        				error: function(){
+        					alert('System Error. Please, contact administrator.');
         				}
         			});
+
+        			continueLoadProcess = setTimeout(fetchLoadData, 2000);
         		}
-            </script>
+
+		$("#startBtn").click(function() {
+			  fetchExcavationData();
+			  fetchLoadData();
+
+			  $("#startBtn").hide();
+			  $("#stopBtn").show();
+		});
+
+		$("#stopBtn").click(function() {
+			  clearTimeout(continueExcavationProcess);
+			  clearTimeout(continueLoadProcess);
+
+			  $("#startBtn").show();
+			  $("#stopBtn").hide();
+		  });
+
+		function clearPlot() {
+			$.plot("#placeholder", null, {
+				yaxis: {
+					min: 0,
+					max: 100
+				},
+				xaxis: {
+					show: false
+				}
+			});
+		}
+		</script>
 </body>
 </html>

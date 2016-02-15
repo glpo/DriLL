@@ -90,31 +90,46 @@ public class ReportsService {
     }
 
     private static PdfPTable createExcavationTable(ExcavationSession session) {
-        PdfPTable table = new PdfPTable(3);
+        PdfPTable table = new PdfPTable(6);
 
         table.setSpacingBefore(25);
-
         table.setSpacingAfter(25);
 
-        PdfPCell time = new PdfPCell(new Phrase("Time"));
+        PdfPCell n = new PdfPCell(new Phrase("#"));
+        table.addCell(n);
+
+        PdfPCell time = new PdfPCell(new Phrase("Burova Ustanovka"));
         table.addCell(time);
 
-        PdfPCell excavation = new PdfPCell(new Phrase("Excavation"));
+        PdfPCell breedTypeAndLoad = new PdfPCell(new Phrase("Tip porodi/Navantazxhennya na doloto, kH"));
+        table.addCell(breedTypeAndLoad);
+
+        PdfPCell excavation = new PdfPCell(new Phrase("Prohodka"));
         table.addCell(excavation);
 
-        PdfPCell load = new PdfPCell(new Phrase("Load"));
-        table.addCell(load);
+        PdfPCell speed = new PdfPCell(new Phrase("Shvidkist znoshennya ozbroennya dolota"));
+        table.addCell(speed);
+
+        PdfPCell avgCost = new PdfPCell(new Phrase("Seredne znachennya vartosti 1m prohodki za dobu"));
+        table.addCell(avgCost);
 
         Random rand = new Random();
-        double startTime = 1.00;
-        int exc = 0;
+        int exc = 1;
 
         for (int i = 0; i < 50; i++) {
-            table.addCell("" + startTime);
+            table.addCell("" + (i + 1));
+            table.addCell("Burova IFKR #23");
+            if(i < 15) {
+                table.addCell("Poroda#1/" + (800 + rand.nextInt(700)));
+            } else if(i >= 15 && i <= 35) {
+                table.addCell("Poroda#2/" + (600 + rand.nextInt(500)));
+            } else if(i > 35) {
+                table.addCell("Poroda#3/" + (400 + rand.nextInt(600)));
+            }
             table.addCell("" + exc);
-            table.addCell("" + (i % 2 == 0 ? 160 : 180));
+            table.addCell("" + String.format("%.2f", 0 + (1 - 0) * rand.nextDouble()));
+            table.addCell("" + rand.nextInt(12 - 8 + 1) + 8);
 
-            startTime += 0.07;
             exc += rand.nextInt(15);
         }
 
@@ -122,32 +137,53 @@ public class ReportsService {
     }
 
     private static PdfPTable createFaultsTable() {
-        PdfPTable table = new PdfPTable(4);
+        PdfPTable table = new PdfPTable(6);
 
         table.setSpacingBefore(25);
-
         table.setSpacingAfter(25);
 
-        PdfPCell time = new PdfPCell(new Phrase("Time"));
+        PdfPCell n = new PdfPCell(new Phrase("#"));
+        table.addCell(n);
+
+        PdfPCell time = new PdfPCell(new Phrase("Burova Ustanovka"));
         table.addCell(time);
 
-        PdfPCell excavation = new PdfPCell(new Phrase("Fault"));
-        table.addCell(excavation);
+        PdfPCell breedTypeAndLoad = new PdfPCell(new Phrase("Tip porodi"));
+        table.addCell(breedTypeAndLoad);
 
-        PdfPCell load = new PdfPCell(new Phrase("Priority"));
+        PdfPCell load = new PdfPCell(new Phrase("Navantazhennay na doloto"));
         table.addCell(load);
 
-        PdfPCell session = new PdfPCell(new Phrase("Session ID"));
-        table.addCell(session);
+        PdfPCell excavation = new PdfPCell(new Phrase("Prohodka"));
+        table.addCell(excavation);
+
+        PdfPCell massage = new PdfPCell(new Phrase("Vikluchna situatsiya"));
+        table.addCell(massage);
 
         Random rand = new Random();
-        int exc = 0;
+        int exc = 220;
 
         for (int i = 0; i < 50; i++) {
-            table.addCell("" + rand.nextInt(100));
+            table.addCell("" + (i + 1));
+            table.addCell("Burova IFKR #23");
+            if(i < 15) {
+                table.addCell("Poroda#1");
+            } else if(i >= 15 && i <= 35) {
+                table.addCell("Poroda#2");
+            } else if(i > 35) {
+                table.addCell("Poroda#3");
+            }
+            table.addCell("" + (800 + rand.nextInt(500)));
             table.addCell("" + exc);
-            table.addCell("" + (i % 2 == 0 ? 160 : 180));
-            table.addCell("" + rand.nextInt(100));
+            if(i % 2 == 0) {
+                table.addCell("Raise the chisel!");
+            } else if(i % 3 == 0) {
+                table.addCell("Breed changed!");
+            } else if(i % 5 == 0) {
+                table.addCell("Drilling is too fast.");
+            } else {
+                table.addCell("System error");
+            }
 
             exc += rand.nextInt(15);
         }
