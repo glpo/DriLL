@@ -263,9 +263,15 @@ public class ExcavationFlotController {
 
             Random rand = new Random();
             for(int i = 0; i < 1; i++) {
-                int exc = 25 + rand.nextInt(15);
+                int exc;
                 if("#placeholder2".equals(flotId)) {
-                    exc = 40 + rand.nextInt(10);
+                    exc = 5+rand.nextInt(2);
+                } else {
+                    if("#placeholder3".equals(flotId)) {
+                        exc = 7+rand.nextInt(2);
+                    } else {
+                        exc = 4+rand.nextInt(1);
+                    }
                 }
                 result.add(exc);
 
@@ -282,13 +288,13 @@ public class ExcavationFlotController {
             }
             excavationSession.setExcavation(excavation);
 
-            boolean isChange = LayersChangingIdentification.idefPlast(excavation);
-            System.out.println(isChange);
-            if(isChange) {
-                result.add(1);
-            } else {
+//            boolean isChange = LayersChangingIdentification.idefPlast(excavation);
+//            System.out.println(isChange);
+//            if(isChange) {
+//                result.add(1);
+//            } else {
                 result.add(0);
-            }
+//            }
 
             excavationService.update(excavationSession);
             return result;
