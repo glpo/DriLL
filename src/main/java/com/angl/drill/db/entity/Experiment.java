@@ -25,15 +25,6 @@ public class Experiment {
     @Field(value = "delta_load")
     private int bitDeltaLoad;
 
-    @Field(value = "per_hour")
-    private int costPerHour;
-
-    @Field(value = "bit_cost")
-    private int bitCost;
-
-    @Field(value = "desc_asc_time")
-    private int descAscTime;
-
     @Field(value = "break_param_val")
     private int breakParamValue;
 
@@ -74,18 +65,6 @@ public class Experiment {
         return bitDeltaLoad;
     }
 
-    public int getCostPerHour() {
-        return costPerHour;
-    }
-
-    public int getBitCost() {
-        return bitCost;
-    }
-
-    public int getDescAscTime() {
-        return descAscTime;
-    }
-
     public int getBreakParamValue() {
         return breakParamValue;
     }
@@ -108,18 +87,6 @@ public class Experiment {
 
     public void setBitDeltaLoad(int bitDeltaLoad) {
         this.bitDeltaLoad = bitDeltaLoad;
-    }
-
-    public void setCostPerHour(int costPerHour) {
-        this.costPerHour = costPerHour;
-    }
-
-    public void setBitCost(int bitCost) {
-        this.bitCost = bitCost;
-    }
-
-    public void setDescAscTime(int descAscTime) {
-        this.descAscTime = descAscTime;
     }
 
     public void setBreakParamValue(int breakParamValue) {

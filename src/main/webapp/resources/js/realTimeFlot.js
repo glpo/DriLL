@@ -1,6 +1,3 @@
-   </div>
-    <!-- /#wrapper -->
-
 <script type="text/javascript">
  		 var options = {
  			series: {
@@ -23,11 +20,7 @@
  		var oldLoadData = [[0,0]];
 
  		$.plot("#placeholder", [oldExcData], options);
-
- 		if( $('#placeholder2').length )
-        {
-        	$.plot("#placeholder2", [oldLoadData], options);
-        }
+ 		$.plot("#placeholder2", [oldLoadData], options);
 
  		function fetchExcavationData() {
 
@@ -99,9 +92,7 @@
 
  		$("#startBtn").click(function() {
  			  fetchExcavationData();
- 			  if($('#placeholder2').length) {
- 			  	fetchLoadData();
- 			  }
+ 			  fetchLoadData();
  			  insertInformationNotification("Drilling process started");
 
  			  $("#startBtn").hide();
@@ -110,10 +101,7 @@
 
  		$("#stopBtn").click(function() {
  			  clearTimeout(continueExcavationProcess);
-
- 			  if($('#placeholder2').length) {
-                clearTimeout(continueLoadProcess);
-              }
+ 			  clearTimeout(continueLoadProcess);
  			  insertInformationNotification("Drilling process stopped");
 
  			  $("#startBtn").show();
@@ -168,5 +156,3 @@
  		 	});
  		}
  		</script>
-</body>
-</html>

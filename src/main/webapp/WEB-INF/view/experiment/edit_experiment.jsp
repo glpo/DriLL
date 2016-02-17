@@ -39,15 +39,6 @@
                                 <td>Bit Delta Load: </td> <td><input class="form-control" value="${experiment.bitDeltaLoad}" name="bitDeltaLoad"></td>
                             </tr>
                             <tr class="odd gradeX">
-                                <td>Cost Per Hour: </td> <td><input class="form-control" value="${experiment.costPerHour}" name="costPerHour"></td>
-                            </tr>
-                            <tr class="odd gradeX">
-                                <td>Bit Cost: </td> <td><input class="form-control" value="${experiment.bitCost}" name="bitCost"></td>
-                            </tr>
-                            <tr class="odd gradeX">
-                                <td>Desc/Asc Time: </td> <td><input class="form-control" value="${experiment.descAscTime}" name="descAscTime"></td>
-                            </tr>
-                            <tr class="odd gradeX">
                                 <td>Break By: </td> <td><input class="form-control" value="${experiment.breakBy}" name="breakBy"></td>
                             </tr>
                             <tr class="odd gradeX">

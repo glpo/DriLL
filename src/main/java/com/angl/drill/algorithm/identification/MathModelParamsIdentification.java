@@ -1,5 +1,6 @@
 package com.angl.drill.algorithm.identification;
 
+import com.angl.drill.db.entity.DrillHole;
 import com.angl.drill.db.entity.Excavation;
 import com.angl.drill.db.entity.ExcavationSession;
 import com.angl.drill.db.entity.Experiment;
@@ -68,7 +69,7 @@ public class MathModelParamsIdentification {
         return k_e * (delta_H_e_j_summary(k_e, e_0, race) / quadratic_sigma_j_summary(k_e, e_0, race));
     }
 
-    public static List<ExcavationSession> findMathModelParams(List<ExcavationSession> testRuns,Experiment experiment) {
+    public static List<ExcavationSession> findMathModelParams(List<ExcavationSession> testRuns, Experiment experiment, DrillHole drillHole) {
         double e_0 = START_WEAR_RATE;
         for (int i = 0; i < testRuns.size(); i++) {
             ExcavationSession testRun = testRuns.get(i);
@@ -104,11 +105,11 @@ public class MathModelParamsIdentification {
 
 //                double c_b = 46;
                 //double t_sp = 7;
-                double d = experiment.getBitCost();// example 132
+                double d = drillHole.getBitCost();// example 132
 
-                double e = findEMinimizingCost(experiment,testRun);
-                testRun.setPredictableDrillTime(e-1/c);
-                testRun.setPredictableCost(findCost(e,experiment,testRun));
+                double e = findEMinimizingCost(experiment, testRun, drillHole);
+                testRun.setPredictableDrillTime(e - 1 / c);
+                testRun.setPredictableCost(findCost(e, experiment, testRun, drillHole));
 
 
 //                double alfa = 0.6;
@@ -121,19 +122,19 @@ public class MathModelParamsIdentification {
 
             }
         }
-        findOptimumBitLoad(experiment,testRuns);
+        findOptimumBitLoad(experiment, testRuns);
         return testRuns;
     }
 
 
-    public static double findEMinimizingCost(Experiment experiment,ExcavationSession es){
+    public static double findEMinimizingCost(Experiment experiment, ExcavationSession es, DrillHole drillHole) {
         double x1, x2;
-        double a=LEFT_LIMIT;
-        double b=RIGHT_LIMIT;
-        while (true){
+        double a = LEFT_LIMIT;
+        double b = RIGHT_LIMIT;
+        while (true) {
             x1 = b - (b - a) / PHI;
             x2 = a + (b - a) / PHI;
-            if (findCost(x1,experiment,es) >= findCost(x2, experiment,es))
+            if (findCost(x1, experiment, es, drillHole) >= findCost(x2, experiment, es, drillHole))
                 a = x1;
             else
                 b = x2;
@@ -143,18 +144,18 @@ public class MathModelParamsIdentification {
         return (a + b) / 2;
     }
 
-    public static double findCost(double x,Experiment exp, ExcavationSession es){
-        double tau = exp.getDescAscTime()+exp.getBitCost()/exp.getCostPerHour();
-        return (exp.getCostPerHour()*(x-1+es.getWearRate()*tau))/(es.getDrillSpeed()*Math.log(x));
+    public static double findCost(double x, Experiment exp, ExcavationSession es, DrillHole drillHole) {
+        double tau = drillHole.getDescAscTime() + drillHole.getBitCost() / drillHole.getCostPerHour();
+        return (drillHole.getCostPerHour() * (x - 1 + es.getWearRate() * tau)) / (es.getDrillSpeed() * Math.log(x));
     }
 
-    public static Experiment findOptimumBitLoad(Experiment experiment, List<ExcavationSession> testRuns){
-        double[][] matrix = new double[SIZE][SIZE+1];
+    public static Experiment findOptimumBitLoad(Experiment experiment, List<ExcavationSession> testRuns) {
+        double[][] matrix = new double[SIZE][SIZE + 1];
         for (int i = 0; i < SIZE; i++) {
-            matrix[i][0]=1;
-            matrix[i][1]=testRuns.get(i).getBitLoad();
-            matrix[i][2]=Math.pow(testRuns.get(i).getBitLoad(),2);
-            matrix[i][3]=testRuns.get(i).getPredictableCost();
+            matrix[i][0] = 1;
+            matrix[i][1] = testRuns.get(i).getBitLoad();
+            matrix[i][2] = Math.pow(testRuns.get(i).getBitLoad(), 2);
+            matrix[i][3] = testRuns.get(i).getPredictableCost();
         }
         double[] previousVariableValues = new double[3];
         for (int i = 0; i < SIZE; i++) {
@@ -169,7 +170,7 @@ public class MathModelParamsIdentification {
             // Посчитаем значения неизвестных на текущей итерации
             // в соответствии с теоретическими формулами
             for (int i = 0; i < SIZE; i++) {
-                // Инициализируем i-ую неизвестную значением
+                // �?нициализируем i-ую неизвестную значением
                 // свободного члена i-ой строки матрицы
                 currentVariableValues[i] = matrix[i][SIZE];
 
@@ -209,8 +210,8 @@ public class MathModelParamsIdentification {
             previousVariableValues = currentVariableValues;
         }
 
-        double optimumBitLoad = -0.5*(previousVariableValues[1]/previousVariableValues[2]);
-        double predictableCost = previousVariableValues[0]-(0.5*previousVariableValues[1])/optimumBitLoad;
+        double optimumBitLoad = -0.5 * (previousVariableValues[1] / previousVariableValues[2]);
+        double predictableCost = previousVariableValues[0] - (0.5 * previousVariableValues[1]) / optimumBitLoad;
         experiment.setOptimumBitLoad(optimumBitLoad);
         experiment.setPredictableDrillCost(predictableCost);
         return experiment;

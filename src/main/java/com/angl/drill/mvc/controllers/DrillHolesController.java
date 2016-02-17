@@ -40,17 +40,10 @@ public class DrillHolesController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createNewDrillHole(@RequestParam(name = "name") String name,
-                                     @RequestParam(name = "location") String location,
+    public String createNewDrillHole(@ModelAttribute DrillHole drillHole,
                                      RedirectAttributes redirectAttributes) {
-
-        if(StringUtils.isNotEmpty(name) && StringUtils.isNotEmpty(location)) {
-            DrillHole drillHole = new DrillHole();
-            drillHole.setName(name);
-            drillHole.setLocation(location);
-
+        if (drillHole != null) {
             drillHoleService.add(drillHole);
-
             redirectAttributes.addFlashAttribute("message", "New Drill-Hole Successfully Created");
         }
         return "redirect:/drillholes/all";
@@ -59,7 +52,6 @@ public class DrillHolesController {
     @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
     public String viewSelectedDrillHole(@PathVariable("id") ObjectId id, ModelMap model){
         DrillHole drillHole = drillHoleService.get(id);
-
         model.put("drillHole", drillHole);
 
         return "drillholes/view_drillhole";
@@ -68,7 +60,6 @@ public class DrillHolesController {
     @RequestMapping(value = "/edit/id/{id}", method = RequestMethod.GET)
     public String getDrillHoleForEdit(@PathVariable("id") ObjectId id, ModelMap model){
         DrillHole drillHole = drillHoleService.get(id);
-
         model.put("hole", drillHole);
 
         return "drillholes/edit_drillhole";

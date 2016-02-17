@@ -168,7 +168,6 @@ public class ExcavationFlotController {
                 } else {
                     date = DateUtils.addMinutes(excavation.get(0).getTime(), excavation.size() * 7);
                 }
-                System.out.println(date);
                 e.setTime(date);
                 excavation.add(e);
             }

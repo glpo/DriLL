@@ -22,6 +22,22 @@
                         <label>Location</label>
                         <input class="form-control" placeholder="Enter Drill-Hole Location" name="location">
                     </div>
+
+                     <div class="form-group">
+                         <label>Cost Of Work (per hour)</label>
+                         <input class="form-control" placeholder="Enter work hour cost" name="costPerHour">
+                    </div>
+
+                    <div class="form-group">
+                         <label>Bit cost</label>
+                         <input class="form-control" placeholder="Enter bit cost" name="bitCost">
+                    </div>
+
+                    <div class="form-group">
+                         <label>Descent/Ascent Time</label>
+                         <input class="form-control" placeholder="Enter descent/ascent time" name="descAscTime">
+                    </div>
+
                     <button type="submit" class="btn btn-default">Create</button>
                     <button type="reset" class="btn btn-default">Discard</button>
                </form>

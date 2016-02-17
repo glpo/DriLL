@@ -27,6 +27,9 @@
                                 <th>#</th>
                                 <th>Drill-Hole Name</th>
                                 <th>Location</th>
+                                <th>Cost Per Hour</th>
+                                <th>Bit Cost</th>
+                                <th>Desc/Asc Time</th>
                                 <th>Select Primary</th>
                                 <th>Operations</th>
                             </tr>
@@ -37,6 +40,9 @@
                                         <td>${loop.index + 1}</td>
                                         <td>${hole.name}</td>
                                         <td>${hole.location}</td>
+                                        <td>${hole.costPerHour}</td>
+                                        <td>${hole.bitCost}</td>
+                                        <td>${hole.descAscTime}</td>
                                         <td>
                                             <c:choose>
                                                 <c:when test = "${hole.id eq currentHole.id}">

@@ -65,9 +65,6 @@ public class ExperimentsController {
                                       @RequestParam(name = "breakBy")           String breakBy,
                                       @RequestParam(name = "bitLoad")           int bitLoad,
                                       @RequestParam(name = "bitDeltaLoad")      int bitDeltaLoad,
-                                      @RequestParam(name = "costPerHour")       int costPerHour,
-                                      @RequestParam(name = "bitCost")           int bitCost,
-                                      @RequestParam(name = "descAscTime")       int descAscTime,
                                       @RequestParam(name = "breakParamValue")   int breakParamValue,
                                       ModelMap modelMap, HttpSession session) {
         ExcavationSession excavationSession = (ExcavationSession) session.getAttribute("excavationSession");
@@ -78,9 +75,6 @@ public class ExperimentsController {
             experiment.setBreakBy(breakBy);
             experiment.setBitLoad(bitLoad);
             experiment.setBitDeltaLoad(bitDeltaLoad);
-            experiment.setCostPerHour(costPerHour);
-            experiment.setBitCost(bitCost);
-            experiment.setDescAscTime(descAscTime);
             experiment.setBreakParamValue(breakParamValue);
             experiment.setSessionId(excavationSession.getId());
 

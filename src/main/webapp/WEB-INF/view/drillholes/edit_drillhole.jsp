@@ -35,6 +35,15 @@
                             <tr class="odd gradeX">
                                 <td>Location: </td> <td><input class="form-control" value="${hole.location}" name="location"></td>
                             </tr>
+                             <tr class="odd gradeX">
+                                <td>Cost Per Hour: </td> <td><input class="form-control" value="${hole.costPerHour}" name="costPerHour"></td>
+                            </tr>
+                            <tr class="odd gradeX">
+                                <td>Bit Cost: </td> <td><input class="form-control" value="${hole.bitCost}" name="bitCost"></td>
+                            </tr>
+                            <tr class="odd gradeX">
+                                <td>Desc/Asc Time: </td> <td><input class="form-control" value="${hole.descAscTime}" name="descAscTime"></td>
+                            </tr>
                         </tbody>
                     </table>
                     <button type="submit" class="btn btn-default">Save</button>

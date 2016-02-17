@@ -27,9 +27,6 @@
                                             <th>Name</th>
                                             <th>Bit Load</th>
                                             <th>Delta Bit Load</th>
-                                            <th>Cost Per Hour</th>
-                                            <th>Bit Cost</th>
-                                            <th>Desc/Asc Time</th>
                                             <th>Break By</th>
                                             <th>Break Param Value</th>
                                             <th>Operations</th>
@@ -42,9 +39,6 @@
                                                     <td>${experiment.name}</td>
                                                     <td>${experiment.bitLoad}</td>
                                                     <td>${experiment.bitDeltaLoad}</td>
-                                                    <td>${experiment.costPerHour}</td>
-                                                    <td>${experiment.bitCost}</td>
-                                                    <td>${experiment.descAscTime}</td>
                                                     <td>${experiment.breakBy}</td>
                                                     <td>${experiment.breakParamValue}</td>
                                                     <td>

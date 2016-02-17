@@ -16,23 +16,19 @@
             <div class="row">
                 <div class="col-lg-6">
                     <c:if test="${not empty experiment}">
-                             <label>Bit Load: </label>${experiment.bitLoad} <br>
-                             <label>Bit Delta Load: </label>${experiment.bitDeltaLoad} <br>
-                             <label>Cost Per Hour: </label>${experiment.costPerHour} <br>
-                             <label>Bit Cost: </label>${experiment.bitCost} <br>
-                             <label>Desc/Asc Time: </label>${experiment.descAscTime} <br>
-                             <label>Stop process By: </label>${experiment.breakBy} <label>Stop param value: </label>${experiment.breakParamValue}
+                         <label>Bit Load: </label>${experiment.bitLoad} <br>
+                         <label>Bit Delta Load: </label>${experiment.bitDeltaLoad} <br>
+                         <label>Stop process By: </label>${experiment.breakBy} <label>Stop param value: </label>${experiment.breakParamValue}
                     </c:if>
-                     <div id="content">
-                           <div class="demo-container">
-                               <div id="placeholder" class="demo-placeholder"></div>
-                           </div>
-                           <p>
-                                <button type="button" class="btn btn-outline btn-primary" id="startBtn">Start Process</button>
-                                <button type="button" class="btn btn-outline btn-primary" id="stopBtn" style="display: none;">Stop Process</button>
-                           </p>
-                       </div>
-                </div>
+                     <div class="demo-container">
+                        <div id="placeholder" class="demo-placeholder"></div>
+                     </div>
+
+                      <p>
+                          <button type="button" class="btn btn-outline btn-primary" id="startBtn">Start Stage</button>
+                          <button type="button" class="btn btn-outline btn-primary" id="stopBtn" style="display: none;">Stop Stage</button>
+                      </p>
+                 </div>
             </div>
             <!-- /.row (nested) -->
         </div>

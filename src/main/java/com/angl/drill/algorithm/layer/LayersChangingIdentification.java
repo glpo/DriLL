@@ -61,11 +61,13 @@ public class LayersChangingIdentification {
                 x0 = xn;
                 xn = x0 - f(x0, l, t1, t0) / df(x0, l, t1, t0); // непосредственно формула Ньютона
             }
+            System.out.println("xn= " + xn);
             firstExc = iter;
             ke.add(xn);
             double keSred = getKeSred(ke);
             double keDispersia = getKeDispersia(ke, keSred);
             double gt = Math.pow(xn - keSred, 2);
+            System.out.println("gt= " + gt);
             Gt = Math.sqrt(1 - (1 / i)) * Gt + (gt - keDispersia) / (Math.sqrt(2 * i) * keDispersia);
         }
         System.out.println("Gt= " + Gt);
