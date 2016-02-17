@@ -30,6 +30,12 @@
 			function onDataReceived1(series) {
 				var data = [];
 
+				var isChange = series.pop();
+				if(isChange === 1) {
+					insertWarningNotification("Breed Changed!");
+					alert('Caution. Breed has been changed!');
+				}
+
 				var arrayLength = series.length;
 				var oldDataLength = oldExcData.length;
 				for (var i = 0; i < arrayLength; i++) {

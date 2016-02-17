@@ -5,6 +5,7 @@ import com.angl.drill.db.entity.DrillHole;
 import com.angl.drill.db.entity.Excavation;
 import com.angl.drill.db.entity.ExcavationSession;
 import com.angl.drill.services.ExcavationService;
+import org.apache.commons.lang.time.DateUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,17 +35,18 @@ public class ExcavationFlotController {
     @RequestMapping(value = "/realtime", method = RequestMethod.GET)
     public String getRealTimeFlot(HttpSession session, ModelMap model) {
         DrillHole drillHole = (DrillHole) session.getAttribute("currentHole");
+        ExcavationSession excavationSession = (ExcavationSession) session.getAttribute("excavationSession");
 
         if (drillHole == null) {
             model.put("message", "Drill-Hole is not selected. Please, select a Drill-Hole.");
-        } else {
-            ExcavationSession excavationSession = new ExcavationSession();
-            excavationSession.setDrillHoleId(drillHole.getId());
-            excavationSession.setIsExperiment(false);
+        } else if(excavationSession == null) {
+            ExcavationSession excSession = new ExcavationSession();
+            excSession.setDrillHoleId(drillHole.getId());
+            excSession.setIsExperiment(false);
 
-            excavationService.add(excavationSession);
+            excavationService.add(excSession);
 
-            session.setAttribute("excavationSession", excavationSession);
+            session.setAttribute("excavationSession", excSession);
         }
         return "excavation/realtime_excavation";
     }
@@ -123,7 +125,7 @@ public class ExcavationFlotController {
         return "excavation/exc_edit";
     }
 
-    @RequestMapping(value = "/check_layer", method = RequestMethod.POST)
+    @RequestMapping(value = "/checkLayer", method = RequestMethod.POST)
     public String checkLayer(ModelMap model){
         ExcavationSession sessionEntity = excavationService.getAll().get(0);
         boolean isChange = LayersChangingIdentification.idefPlast(sessionEntity.getExcavation());
@@ -141,13 +143,46 @@ public class ExcavationFlotController {
         List<Integer> result = new ArrayList<Integer>();
 
         if(drillHole != null && excavationSession != null) {
-            //List<Excavation> excavation = excavationService.get ... ;
-
-            Random rand = new Random();
-            for(int i = 0; i < 1; i++) {
-                result.add(rand.nextInt(76));
+            List<Excavation> excavation = excavationSession.getExcavation();
+            Date date;
+            if(excavation == null || excavation.isEmpty()) {
+                excavation = new ArrayList<Excavation>();
             }
 
+            Random rand = new Random();
+            int breedChangeLimit = 5 + rand.nextInt(11);
+            for(int i = 0; i < 1; i++) {
+                int exc;
+                if(excavation.size() < 8) {
+                    exc = 60 + rand.nextInt(20);
+                } else {
+                    exc = 10 + rand.nextInt(10);
+                }
+                result.add(exc);
+
+                Excavation e = new Excavation();
+                e.setExc(exc);
+
+                if(excavation.isEmpty()) {
+                    date = new Date();
+                } else {
+                    date = DateUtils.addMinutes(excavation.get(0).getTime(), excavation.size() * 7);
+                }
+                System.out.println(date);
+                e.setTime(date);
+                excavation.add(e);
+            }
+            excavationSession.setExcavation(excavation);
+
+            boolean isChange = LayersChangingIdentification.idefPlast(excavation);
+            System.out.println(isChange);
+            if(isChange) {
+                result.add(1);
+            } else {
+                result.add(0);
+            }
+
+            excavationService.update(excavationSession);
             return result;
         }
         //return "[[1, 14.4], [2, 30.7], [3, 45.8], [4, 8.6], [5, 20.5], [6, 45.6], [7, 50.9], [8, 28.8], [9, 65.0], [10, 8.1], [11, 100], [12, 10]]";

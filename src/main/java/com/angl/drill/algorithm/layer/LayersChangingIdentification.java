@@ -42,7 +42,7 @@ public class LayersChangingIdentification {
         double firstExcavation = firstExc.getExc();
         Excavation iter;
         double Gt = 0;
-        for (int i = 2; i < excavations.size(); i++) {
+        for (int i = 1; i < excavations.size(); i++) {
             iter = excavations.get(i);
             double currentDeltaTime = ((iter.getTime().getTime() - firstDate) / (60 * 1000) % 60) / 60;
             double prevDeltaTime = ((firstExc.getTime().getTime() - firstDate) / (60 * 1000) % 60) / 60;
@@ -68,6 +68,7 @@ public class LayersChangingIdentification {
             double gt = Math.pow(xn - keSred, 2);
             Gt = Math.sqrt(1 - (1 / i)) * Gt + (gt - keDispersia) / (Math.sqrt(2 * i) * keDispersia);
         }
+        System.out.println("Gt= " + Gt);
         if (Gt > 2.5) return true;
         return false;
     }

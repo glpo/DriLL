@@ -86,6 +86,9 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+                         <li>
+                            <a href="/drill/drillholes/all"><i class="fa fa-table fa-fw"></i>Drill-holes</a>
+                        </li>
                         <li>
                             <a href="/drill/dashboard/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
@@ -125,9 +128,6 @@
                                </li>
                             </ul>
                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="/drill/drillholes/all"><i class="fa fa-table fa-fw"></i>Drill-holes</a>
                         </li>
                         <li>
                             <a href="/drill/reports/all"><i class="fa fa-table fa-fw"></i>Reports</a>

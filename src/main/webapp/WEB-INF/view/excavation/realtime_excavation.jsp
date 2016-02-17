@@ -8,10 +8,10 @@
 
 <div class="panel panel-default">
 <c:if test="${not empty message}">
-                    <div class="alert alert-success">
-                        ${message}
-                    </div>
-                </c:if>
+    <div class="alert alert-success">
+        ${message}
+    </div>
+</c:if>
    <div class="panel-heading">
         <i class="fa fa-bar-chart-o fa-fw"></i> Excavation Chart
         <div class="pull-right">

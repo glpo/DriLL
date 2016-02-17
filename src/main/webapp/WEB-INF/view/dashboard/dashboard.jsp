@@ -5,7 +5,12 @@
         <h1 class="page-header">Dashboard</h1>
     </div>
 </div>
-
+<c:if test="${not empty message}">
+    <div class="alert alert-success">
+        ${message}
+    </div>
+</c:if>
+<c:if test="${empty message}">
 <div class="row">
     <div class="col-lg-8">
         <div class="panel panel-default">
@@ -192,5 +197,5 @@
     <!-- /.col-lg-4 -->
 </div>
 </div>
-
+</c:if>
 <%@ include file="../misc/footer.jsp" %>

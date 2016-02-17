@@ -1,13 +1,13 @@
 #content {
-	width: 880px;
+	width: 980px;
 	//margin: 0 auto;
 	//padding: 10px;
 }
 
 .demo-container {
 	box-sizing: border-box;
-	width: 900px;
-	height: 220px;
+	width: 1000px;
+	height: 210px;
 	//padding: 20px 15px 15px 15px;
 	//margin: 15px auto 30px auto;
 	border: 1px solid #ddd;

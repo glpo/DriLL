@@ -20,7 +20,7 @@
         <access-denied-handler error-page="/403" />
 
         <form-login login-page='/login' login-processing-url="/j_spring_security_check"
-                    default-target-url="/dashboard/dashboard" always-use-default-target="false"
+                    default-target-url="/drillholes/all" always-use-default-target="false"
                     authentication-failure-url="/login?error" username-parameter="username"
                     password-parameter="password" />
 
@@ -41,7 +41,8 @@ player where player_email=?"
         </authentication-provider>-->
         <authentication-provider>
             <user-service>
-                <user name="admin" password="pass" authorities="ROLE_ADMIN,ROLE_USER"/>
+                <user name="admin" password="pass" authorities="ROLE_ADMIN, ROLE_USER"/>
+                <user name="bm" password="pass" authorities="ROLE_USER"/>
             </user-service>
         </authentication-provider>
     </authentication-manager>
