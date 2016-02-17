@@ -43,6 +43,41 @@
                  <button type="button" class="btn btn-outline btn-primary" id="startBtn">Start Process</button>
                  <button type="button" class="btn btn-outline btn-primary" id="stopBtn" style="display: none;">Stop Process</button>
              </p>
+
+             <div class="panel panel-default">
+                         <div class="panel-heading">
+                             <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                         </div>
+                         <!-- /.panel-heading -->
+                         <div class="panel-body">
+                             <div class="list-group">
+                              <!--   <a href="#" class="list-group-item">
+                                     <i class="fa fa-tasks fa-fw"></i> Test Drilling Started
+                                     <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                     </span>
+                                 </a>
+                                 <a href="#" class="list-group-item">
+                                     <i class="fa fa-upload fa-fw"></i> Raise the chisel
+                                     <span class="pull-right text-muted small"><em>11:32 AM</em>
+                                     </span>
+                                 </a>
+                                 <a href="#" class="list-group-item">
+                                     <i class="fa fa-bolt fa-fw"></i> Chisel Crashed!
+                                     <span class="pull-right text-muted small"><em>11:13 AM</em>
+                                     </span>
+                                 </a>
+                                 <a href="#" class="list-group-item">
+                                     <i class="fa fa-warning fa-fw"></i> Formation Changed!
+                                     <span class="pull-right text-muted small"><em>10:57 AM</em>
+                                     </span>
+                                 </a> -->
+                             </div>
+                             <!-- /.list-group -->
+                             <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                         </div>
+                         <!-- /.panel-body -->
+                     </div>
+                     <!-- /.panel -->
        </c:if>
    </div>
    <!-- /.panel-body -->

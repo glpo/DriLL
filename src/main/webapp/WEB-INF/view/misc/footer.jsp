@@ -8,7 +8,7 @@
 			},
 			yaxis: {
 				min: 0,
-				max: 100
+				max: 80
 			},
 			xaxis: {
 				min: 0,
@@ -90,6 +90,7 @@
 		$("#startBtn").click(function() {
 			  fetchExcavationData();
 			  fetchLoadData();
+			  insertInformationNotification("Drilling process started");
 
 			  $("#startBtn").hide();
 			  $("#stopBtn").show();
@@ -98,6 +99,7 @@
 		$("#stopBtn").click(function() {
 			  clearTimeout(continueExcavationProcess);
 			  clearTimeout(continueLoadProcess);
+			  insertInformationNotification("Drilling process stopped");
 
 			  $("#startBtn").show();
 			  $("#stopBtn").hide();
@@ -113,6 +115,42 @@
 					show: false
 				}
 			});
+		}
+
+		function insertInformationNotification(text) {
+			$(".list-group").append("<a href=\"#\" class=\"list-group-item\"> <i class=\"fa fa-tasks fa-fw\"></i> " + text  + "<span class=\"pull-right text-muted small\"><em>" + getFormattedCurrentDate() + "</em> </span> </a>");
+			storeNotification("information", text);
+		}
+		function insertUploadNotification(text) {
+			$(".list-group").append("<a href=\"#\" class=\"list-group-item\"> <i class=\"fa fa-upload fa-fw\"></i> " + text  + "<span class=\"pull-right text-muted small\"><em>" + getFormattedCurrentDate() + "</em> </span> </a>");
+			storeNotification("upload", text);
+		}
+		function insertBoltNotification(text) {
+			$(".list-group").append("<a href=\"#\" class=\"list-group-item\"> <i class=\"fa fa-bolt fa-fw\"></i> " + text  + "<span class=\"pull-right text-muted small\"><em>" + getFormattedCurrentDate() + "</em> </span> </a>");
+			storeNotification("bolt", text);
+		}
+		function insertWarningNotification(text) {
+			$(".list-group").append("<a href=\"#\" class=\"list-group-item\"> <i class=\"fa fa-warning fa-fw\"></i> " + text  + "<span class=\"pull-right text-muted small\"><em>" + getFormattedCurrentDate() + "</em> </span> </a>");
+			storeNotification("warning", text);
+		}
+
+		function getFormattedCurrentDate() {
+			var d = new Date();
+			var h = d.getHours();
+			var m = d.getMinutes();
+			var s = d.getSeconds();
+			var ampm = h >= 12 ? 'pm' : 'am';
+			return h + ":" + m + ":" + s + " " + ampm;
+		}
+
+		function storeNotification(typeV, textV) {
+
+			$.ajax({
+				url: "/drill/notification/createNotification",
+				type: "GET",
+				dataType: "json",
+				data : {type : typeV, text : textV}
+		 	});
 		}
 		</script>
 </body>

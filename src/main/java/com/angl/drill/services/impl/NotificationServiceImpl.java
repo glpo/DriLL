@@ -3,6 +3,7 @@ package com.angl.drill.services.impl;
 import com.angl.drill.db.dao.NotificationDAO;
 import com.angl.drill.db.entity.Notification;
 import com.angl.drill.services.BaseService;
+import com.angl.drill.services.NotificationService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class NotificationServiceImpl extends BaseService<Notification> implements NotificationDAO{
+public class NotificationServiceImpl extends BaseService<Notification> implements NotificationService{
     @Autowired
     NotificationDAO notificationDAO;
 

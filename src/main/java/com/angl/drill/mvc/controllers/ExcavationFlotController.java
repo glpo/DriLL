@@ -145,7 +145,7 @@ public class ExcavationFlotController {
 
             Random rand = new Random();
             for(int i = 0; i < 1; i++) {
-                result.add(rand.nextInt(100));
+                result.add(rand.nextInt(76));
             }
 
             return result;
@@ -167,7 +167,7 @@ public class ExcavationFlotController {
 
             Random rand = new Random();
             for(int i = 0; i < 1; i++) {
-                result.add(70 + rand.nextInt(10));
+                result.add(50 + rand.nextInt(10));
             }
 
             return result;

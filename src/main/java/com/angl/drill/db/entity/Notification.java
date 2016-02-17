@@ -14,6 +14,7 @@ public class Notification {
     public static final String NOTIFICATION_COLLECTION_NAME = "notifications";
 
     public Notification() {
+        date = new Date();
     }
 
     @Id

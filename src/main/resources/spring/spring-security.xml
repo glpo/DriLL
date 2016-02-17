@@ -13,6 +13,7 @@
         <intercept-url pattern="/drillholes/**" access="isAuthenticated()" />
         <intercept-url pattern="/reports/**" access="isAuthenticated()" />
         <intercept-url pattern="/experiment/**" access="isAuthenticated()" />
+        <intercept-url pattern="/notification/**" access="isAuthenticated()" />
         <intercept-url pattern="/excavation/**" access="hasRole('ROLE_USER')" />
 
 
