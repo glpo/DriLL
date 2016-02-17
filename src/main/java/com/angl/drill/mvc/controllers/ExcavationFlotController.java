@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -121,6 +122,16 @@ public class ExcavationFlotController {
         }
 
         return "excavation/exc_edit";
+    }
+
+    @RequestMapping(value = "/delete/id/{id}", method = RequestMethod.GET)
+    public String deleteSelectedExcavationSession(@PathVariable("id") ObjectId id, RedirectAttributes redirectAttributes){
+        ExcavationSession session = excavationService.get(id);
+        excavationService.remove(id);
+
+        redirectAttributes.addFlashAttribute("message", "Excavation Session " + session.getId() + " Deleted Successfully");
+
+        return "redirect:/excavation/history";
     }
 
     @RequestMapping(value = "/checkLayer", method = RequestMethod.POST)
@@ -252,7 +263,10 @@ public class ExcavationFlotController {
 
             Random rand = new Random();
             for(int i = 0; i < 1; i++) {
-                int exc = rand.nextInt(58);
+                int exc = 25 + rand.nextInt(15);
+                if("#placeholder2".equals(flotId)) {
+                    exc = 40 + rand.nextInt(10);
+                }
                 result.add(exc);
 
                 Excavation e = new Excavation();

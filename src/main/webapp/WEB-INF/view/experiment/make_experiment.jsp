@@ -30,6 +30,14 @@
                           <button type="button" class="btn btn-outline btn-primary" id="startBtn">Start Stage</button>
                           <button type="button" class="btn btn-outline btn-primary" id="stopBtn" style="display: none;">Stop Stage</button>
                       </p>
+                      <span id="predictableCost1"></span><br>
+                      <span id="predictableDrillTime1"></span><br>
+                      <span id="predictableCost2"></span><br>
+                      <span id="predictableDrillTime2"></span><br>
+                      <span id="predictableCost3"></span><br>
+                      <span id="predictableDrillTime3"></span><br>
+                      <span id="predictableCostResult"></span><br>
+                      <span id="predictableDrillTimeResult"></span><br>
                  </div>
             </div>
             <!-- /.row (nested) -->

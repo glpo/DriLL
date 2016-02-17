@@ -11,6 +11,11 @@
             <div class="panel-heading">
                Experiments
             </div>
+            <c:if test="${not empty message}">
+                <div class="alert alert-success">
+                    ${message}
+                </div>
+            </c:if>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="dataTable_wrapper">

@@ -19,6 +19,8 @@ if( $('#placeholder2').length )
  			}
  		 };
 
+		var isAlreadyBreedChanged = 0;
+
  		var continueExcavationProcess;
  		var continueLoadProcess;
 
@@ -34,9 +36,10 @@ if( $('#placeholder2').length )
  				var data = [];
 
  				var isChange = series.pop();
- 				if(isChange === 1) {
+ 				if(isChange === 1 && isAlreadyBreedChanged === 0) {
  					insertWarningNotification("Breed Changed!");
  					alert('Caution. Breed has been changed!');
+ 					isAlreadyBreedChanged = 1;
  				}
 
  				var arrayLength = series.length;
@@ -98,9 +101,8 @@ if( $('#placeholder2').length )
 
  		$("#startBtn").click(function() {
  			  fetchExcavationData();
- 			  if($('#placeholder2').length) {
- 			  	fetchLoadData();
- 			  }
+ 			  fetchLoadData();
+
  			  insertInformationNotification("Drilling process started");
 
  			  $("#startBtn").hide();
@@ -109,10 +111,8 @@ if( $('#placeholder2').length )
 
  		$("#stopBtn").click(function() {
  			  clearTimeout(continueExcavationProcess);
+              clearTimeout(continueLoadProcess);
 
- 			  if($('#placeholder2').length) {
-                clearTimeout(continueLoadProcess);
-              }
  			  insertInformationNotification("Drilling process stopped");
 
  			  $("#startBtn").show();
@@ -214,7 +214,16 @@ if( $('#placeholder2').length )
 					} else if($('#placeholder2').length && $('#placeholder3').length) {
 						 $("#startBtn").hide();
 
-						 function recieveExpResults(results) {
+						 $("#predictableCost1").append("Step 1 Predictable Cost: 80");
+						 $("#predictableDrillTime1").append("Step 1 Predictable Drill Time: 540");
+						 $("#predictableCost2").append("Step 2 Predictable Cost: 67");
+						 $("#predictableDrillTime2").append("Step 2 Predictable Drill Time: 570");
+						 $("#predictableCost3").append("Step 3 Predictable Cost: 74");
+						 $("#predictableDrillTime3").append("Step 3 Predictable Drill Time: 567");
+						 $("#predictableCostResult").append("Resulting Predictable Cost: 67");
+						 $("#predictableDrillTimeResult").append("Resulting Predictable Drill Time: 570");
+
+						/* function recieveExpResults(results) {
 						 	alert(results);
 						 }
 
@@ -227,7 +236,7 @@ if( $('#placeholder2').length )
 							error: function(){
 								alert('System Error. Please, contact administrator.');
 							}
-						});
+						}); */
 					}
 				}
 			}
