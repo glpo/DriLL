@@ -40,6 +40,17 @@ public class ExcavationSession {
     @Field(value = "drill_hole")
     private ObjectId drillHoleId;
 
+    @Field(value = "experiment")
+    private ObjectId experimentId;
+
+    public ObjectId getExperimentId() {
+        return experimentId;
+    }
+
+    public void setExperimentId(ObjectId experimentId) {
+        this.experimentId = experimentId;
+    }
+
     public ObjectId getDrillHoleId() {
         return drillHoleId;
     }

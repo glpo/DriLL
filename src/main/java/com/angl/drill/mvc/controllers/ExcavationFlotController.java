@@ -4,16 +4,14 @@ import com.angl.drill.algorithm.layer.LayersChangingIdentification;
 import com.angl.drill.db.entity.DrillHole;
 import com.angl.drill.db.entity.Excavation;
 import com.angl.drill.db.entity.ExcavationSession;
+import com.angl.drill.db.entity.Experiment;
 import com.angl.drill.services.ExcavationService;
 import org.apache.commons.lang.time.DateUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -174,7 +172,7 @@ public class ExcavationFlotController {
             excavationSession.setExcavation(excavation);
 
             boolean isChange = LayersChangingIdentification.idefPlast(excavation);
-            System.out.println(isChange);
+
             if(isChange) {
                 result.add(1);
             } else {
@@ -207,6 +205,81 @@ public class ExcavationFlotController {
             return result;
         }
         //return "[[1, 14.4], [2, 30.7], [3, 45.8], [4, 8.6], [5, 20.5], [6, 45.6], [7, 50.9], [8, 28.8], [9, 65.0], [10, 8.1], [11, 100], [12, 10]]";
+        return Collections.EMPTY_LIST;
+    }
+
+    @RequestMapping(value = "/fetchExperimentExcavationData", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Integer> fetchExcavationDataForExperiment(@RequestParam(name = "id") String flotId, HttpSession session){
+        DrillHole drillHole = (DrillHole) session.getAttribute("currentHole");
+        ExcavationSession excavationSession = (ExcavationSession) session.getAttribute("excavationSession");
+        Experiment experiment = (Experiment) session.getAttribute("currentExperiment");
+
+        if("#placeholder2".equals(flotId)) {
+            excavationSession = (ExcavationSession) session.getAttribute("excavationSession2");
+            if(excavationSession == null) {
+                excavationSession = new ExcavationSession();
+                excavationSession.setDrillHoleId(drillHole.getId());
+                excavationSession.setExperimentId(experiment.getId());
+                excavationSession.setIsExperiment(true);
+
+                excavationService.add(excavationSession);
+
+                session.setAttribute("excavationSession2", excavationSession);
+            }
+        } else if("#placeholder3".equals(flotId)) {
+            excavationSession = (ExcavationSession) session.getAttribute("excavationSession3");
+            if(excavationSession == null) {
+                excavationSession = new ExcavationSession();
+                excavationSession.setDrillHoleId(drillHole.getId());
+                excavationSession.setExperimentId(experiment.getId());
+                excavationSession.setIsExperiment(true);
+
+                excavationService.add(excavationSession);
+
+                session.setAttribute("excavationSession3", excavationSession);
+            }
+        }
+
+        List<Integer> result = new ArrayList<Integer>();
+
+        if(drillHole != null && excavationSession != null && experiment != null) {
+            List<Excavation> excavation = excavationSession.getExcavation();
+            Date date;
+            if(excavation == null || excavation.isEmpty()) {
+                excavation = new ArrayList<Excavation>();
+            }
+
+            Random rand = new Random();
+            for(int i = 0; i < 1; i++) {
+                int exc = rand.nextInt(58);
+                result.add(exc);
+
+                Excavation e = new Excavation();
+                e.setExc(exc);
+
+                if(excavation.isEmpty()) {
+                    date = new Date();
+                } else {
+                    date = DateUtils.addMinutes(excavation.get(0).getTime(), excavation.size() * 7);
+                }
+                e.setTime(date);
+                excavation.add(e);
+            }
+            excavationSession.setExcavation(excavation);
+
+            boolean isChange = LayersChangingIdentification.idefPlast(excavation);
+            System.out.println(isChange);
+            if(isChange) {
+                result.add(1);
+            } else {
+                result.add(0);
+            }
+
+            excavationService.update(excavationSession);
+            return result;
+        }
+
         return Collections.EMPTY_LIST;
     }
 }

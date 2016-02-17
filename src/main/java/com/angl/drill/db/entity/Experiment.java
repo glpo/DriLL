@@ -34,17 +34,6 @@ public class Experiment {
     @Field(value = "predictable_drill_cost")
     private double predictableDrillCost;
 
-    @Field(value = "session")
-    private ObjectId sessionId;
-
-    public ObjectId getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(ObjectId sessionId) {
-        this.sessionId = sessionId;
-    }
-
     public ObjectId getId() {
         return id;
     }

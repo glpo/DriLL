@@ -67,10 +67,8 @@ public class LayersChangingIdentification {
             double keSred = getKeSred(ke);
             double keDispersia = getKeDispersia(ke, keSred);
             double gt = Math.pow(xn - keSred, 2);
-            System.out.println("gt= " + gt);
             Gt = Math.sqrt(1 - (1 / i)) * Gt + (gt - keDispersia) / (Math.sqrt(2 * i) * keDispersia);
         }
-        System.out.println("Gt= " + Gt);
         if (Gt > 2.5) return true;
         return false;
     }

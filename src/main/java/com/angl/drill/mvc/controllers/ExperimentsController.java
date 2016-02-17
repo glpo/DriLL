@@ -1,6 +1,8 @@
 package com.angl.drill.mvc.controllers;
 
+import com.angl.drill.algorithm.identification.MathModelParamsIdentification;
 import com.angl.drill.db.entity.DrillHole;
+import com.angl.drill.db.entity.Excavation;
 import com.angl.drill.db.entity.ExcavationSession;
 import com.angl.drill.db.entity.Experiment;
 import com.angl.drill.services.ExcavationService;
@@ -14,7 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/experiment")
@@ -67,21 +71,24 @@ public class ExperimentsController {
                                       @RequestParam(name = "bitDeltaLoad")      int bitDeltaLoad,
                                       @RequestParam(name = "breakParamValue")   int breakParamValue,
                                       ModelMap modelMap, HttpSession session) {
+
         ExcavationSession excavationSession = (ExcavationSession) session.getAttribute("excavationSession");
 
-        if(excavationSession != null) {
-            Experiment experiment = new Experiment();
-            experiment.setName(experimentName);
-            experiment.setBreakBy(breakBy);
-            experiment.setBitLoad(bitLoad);
-            experiment.setBitDeltaLoad(bitDeltaLoad);
-            experiment.setBreakParamValue(breakParamValue);
-            experiment.setSessionId(excavationSession.getId());
+        Experiment experiment = new Experiment();
+        experiment.setName(experimentName);
+        experiment.setBreakBy(breakBy);
+        experiment.setBitLoad(bitLoad);
+        experiment.setBitDeltaLoad(bitDeltaLoad);
+        experiment.setBreakParamValue(breakParamValue);
 
-            experimentService.add(experiment);
+        experimentService.add(experiment);
 
-            modelMap.put("experiment", experiment);
-        }
+        excavationSession.setExperimentId(experiment.getId());
+
+        excavationService.update(excavationSession);
+
+        modelMap.put("experiment", experiment);
+        session.setAttribute("currentExperiment", experiment);
 
         return "/experiment/make_experiment";
     }
@@ -111,6 +118,37 @@ public class ExperimentsController {
         redirectAttributes.addFlashAttribute("message", "Experiment " + experiment.getName() + " Deleted Successfully");
 
         return "redirect:/experiment/history";
+    }
+
+    @RequestMapping(value = "/getExperimentResults", method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> fetchLoadData(HttpSession session){
+        DrillHole drillHole = (DrillHole) session.getAttribute("currentHole");
+        Experiment experiment = (Experiment) session.getAttribute("currentExperiment");
+        ExcavationSession excavationSession1 = (ExcavationSession) session.getAttribute("excavationSession");
+        ExcavationSession excavationSession2 = (ExcavationSession) session.getAttribute("excavationSession2");
+        ExcavationSession excavationSession3 = (ExcavationSession) session.getAttribute("excavationSession3");
+
+        System.out.println("excavationSession1= " + excavationSession1);
+        System.out.println("excavationSession2= " + excavationSession2);
+        System.out.println("excavationSession3= " + excavationSession3);
+
+        List<ExcavationSession> experimentSessions = new ArrayList<ExcavationSession>();
+        experimentSessions.add(excavationSession1);
+        experimentSessions.add(excavationSession2);
+        experimentSessions.add(excavationSession3);
+
+        List<String> result = new ArrayList<String>();
+
+        List<ExcavationSession> resultSessions = MathModelParamsIdentification.findMathModelParams(experimentSessions, experiment, drillHole);
+
+        System.out.println("getOptimumBitLoad= " + experiment.getOptimumBitLoad());
+        System.out.println("getPredictableDrillCost= " + experiment.getPredictableDrillCost());
+
+        result.add(String.valueOf(experiment.getOptimumBitLoad()));
+        result.add(String.valueOf(experiment.getPredictableDrillCost()));
+
+        return result;
     }
 
 }

@@ -16,14 +16,16 @@
             <div class="row">
                 <div class="col-lg-6">
                     <c:if test="${not empty experiment}">
-                         <label>Bit Load: </label>${experiment.bitLoad} <br>
-                         <label>Bit Delta Load: </label>${experiment.bitDeltaLoad} <br>
-                         <label>Stop process By: </label>${experiment.breakBy} <label>Stop param value: </label>${experiment.breakParamValue}
+                         <label>Bit Load:&nbsp </label><span id="bitLoad">${experiment.bitLoad}</span> <br>
+                         <label>Bit Delta Load:&nbsp </label><span id="bitDeltaLoad">${experiment.bitDeltaLoad}</span><br>
+                         <label>Stop process By:&nbsp </label><span id="breakBy">${experiment.breakBy}</span><br>
+                         <label>Stop param value:&nbsp </label><span id="breakByVal">${experiment.breakParamValue}</span>
                     </c:if>
                      <div class="demo-container">
                         <div id="placeholder" class="demo-placeholder"></div>
                      </div>
-
+                     <span id="flot2"></span>
+                     <span id="flot3"></span>
                       <p>
                           <button type="button" class="btn btn-outline btn-primary" id="startBtn">Start Stage</button>
                           <button type="button" class="btn btn-outline btn-primary" id="stopBtn" style="display: none;">Stop Stage</button>

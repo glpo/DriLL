@@ -2,6 +2,9 @@
     <!-- /#wrapper -->
 
 <script type="text/javascript">
+
+if( $('#placeholder2').length )
+{
  		 var options = {
  			series: {
  				shadowSize: 6
@@ -23,11 +26,7 @@
  		var oldLoadData = [[0,0]];
 
  		$.plot("#placeholder", [oldExcData], options);
-
- 		if( $('#placeholder2').length )
-        {
-        	$.plot("#placeholder2", [oldLoadData], options);
-        }
+        $.plot("#placeholder2", [oldLoadData], options);
 
  		function fetchExcavationData() {
 
@@ -131,6 +130,141 @@
  				}
  			});
  		}
+ } else {
+		var options = {
+			series: {
+				shadowSize: 5
+			},
+			yaxis: {
+				min: 0,
+				max: 60
+			},
+			xaxis: {
+				min: 0,
+				max: 140
+			}
+		 };
+
+		var continueExcavationProcess;
+		var oldExcData = [[0,0]];
+		var deep = 0;
+		var time = 0;
+
+		var bitLoad = $("#bitLoad").text();
+		var bitDeltaLoad = $("#bitDeltaLoad").text();
+		var breakBy = $("#breakBy").text();
+		var breakByVal = $("#breakByVal").text();
+
+		var flotId = "#placeholder";
+
+		$.plot(flotId, [oldExcData], options);
+
+		function checkExperimentExecution(breakBy, breakByVal, deep, time) {
+			if(breakBy == "Time" && breakByVal <= time) {
+				return true;
+			} else if(breakBy == "Excavation" && breakByVal <= deep) {
+				return true;
+			}
+			return false;
+		}
+
+		function fetchExcavationDataForExperiment() {
+
+			function onDataReceivedExp(series) {
+				var data = [];
+
+				var isChange = series.pop();
+				if(isChange === 1) {
+					insertWarningNotification("Breed Changed!");
+					alert('Caution. Breed has been changed!');
+				}
+
+				var arrayLength = series.length;
+				var oldDataLength = oldExcData.length;
+				for (var i = 0; i < arrayLength; i++) {
+				   data.push([(oldDataLength + i) * 7, series[i]]);
+				   deep += series[i];
+				   time += (oldDataLength + i) * 7;
+				}
+
+				var result = oldExcData.concat(data);
+				oldExcData = result;
+
+				$.plot(flotId, [result], options);
+
+				if(checkExperimentExecution(breakBy, breakByVal, deep, time)) {
+					$("#stopBtn").click();
+
+					oldExcData = [[0,0]];
+                    deep = 0;
+                    time = 0;
+
+					if($('#placeholder2').length && $('#placeholder3').length == 0) {
+						flotId = "#placeholder3";
+						$("#flot3").append("<div class=\"demo-container\"> <div id=\"placeholder3\" class=\"demo-placeholder\"></div> </div>");
+						$.plot(flotId, oldExcData, options);
+						alert('Step 2 Completed');
+
+					} else if ($('#placeholder3').length == 0){
+						flotId = "#placeholder2";
+						$("#flot2").append("<div class=\"demo-container\"> <div id=\"placeholder2\" class=\"demo-placeholder\"></div> </div>");
+						$.plot(flotId, oldExcData, options);
+						alert('Step 1 Completed');
+
+					} else if($('#placeholder2').length && $('#placeholder3').length) {
+						 $("#startBtn").hide();
+
+						 function recieveExpResults(results) {
+						 	alert(results);
+						 }
+
+						 $.ajax({
+							url: "/drill/experiment/getExperimentResults",
+							type: "GET",
+							contentType : "application/json",
+							dataType: "json",
+							success: recieveExpResults,
+							error: function(){
+								alert('System Error. Please, contact administrator.');
+							}
+						});
+					}
+				}
+			}
+
+			$.ajax({
+				url: "/drill/excavation/fetchExperimentExcavationData",
+				type: "GET",
+				contentType : "application/json",
+				dataType: "json",
+				data : {id : flotId},
+				success: onDataReceivedExp,
+				error: function(){
+					alert('System Error. Please, contact administrator.');
+				}
+			});
+
+			continueExcavationProcess = setTimeout(fetchExcavationDataForExperiment, 2000);
+		}
+
+		$("#startBtn").click(function() {
+			  fetchExcavationDataForExperiment();
+			  insertInformationNotification("Drilling process started");
+
+			  $("#startBtn").hide();
+			  $("#stopBtn").show();
+		});
+
+		$("#stopBtn").click(function() {
+			  clearTimeout(continueExcavationProcess);
+
+			  insertInformationNotification("Drilling process stopped");
+
+			  $("#startBtn").show();
+			  $("#stopBtn").hide();
+		  });
+
+ }
 
  		function insertInformationNotification(text) {
  			$(".list-group").append("<a href=\"#\" class=\"list-group-item\"> <i class=\"fa fa-tasks fa-fw\"></i> " + text  + "<span class=\"pull-right text-muted small\"><em>" + getFormattedCurrentDate() + "</em> </span> </a>");
