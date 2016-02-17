@@ -1,9 +1,13 @@
 package com.angl.drill.algorithm.layer;
 
 import com.angl.drill.db.entity.Excavation;
+import org.apache.commons.lang.time.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Andrii on 30.01.2016.
@@ -44,8 +48,9 @@ public class LayersChangingIdentification {
         double Gt = 0;
         for (int i = 1; i < excavations.size(); i++) {
             iter = excavations.get(i);
-            double currentDeltaTime = ((iter.getTime().getTime() - firstDate) / (60 * 1000) % 60) / 60;
-            double prevDeltaTime = ((firstExc.getTime().getTime() - firstDate) / (60 * 1000) % 60) / 60;
+            double currentDeltaTime = TimeUnit.MILLISECONDS.toMinutes(iter.getTime().getTime() - firstDate);
+            double prevDeltaTime = TimeUnit.MILLISECONDS.toMinutes(firstExc.getTime().getTime() - firstDate);
+
             double currentDeltaExcavation = iter.getExc() - firstExcavation;
             double prevDeltaExcavation = firstExc.getExc() - firstExcavation;
             a = -1 / currentDeltaTime;
@@ -56,20 +61,24 @@ public class LayersChangingIdentification {
                 x0 = a; // для выбора начальной точки проверяем f(x0)*d2f(x0)>0 ?
             else x0 = RIGHT_LIMIT;
             xn = x0 - f(x0, l, t1, t0) / df(x0, l, t1, t0); // считаем первое приближение
-            while (Math.abs(x0 - xn) > PRECISION) // пока не достигнем необходимой точности, будет продолжать вычислять
-            {
+            while (Math.abs(x0 - xn) > PRECISION){
                 x0 = xn;
                 xn = x0 - f(x0, l, t1, t0) / df(x0, l, t1, t0); // непосредственно формула Ньютона
             }
-            System.out.println("xn= " + xn);
             firstExc = iter;
+            if(Double.isNaN(xn)){
+                continue;
+            }
             ke.add(xn);
             double keSred = getKeSred(ke);
             double keDispersia = getKeDispersia(ke, keSred);
-            double gt = Math.pow(xn - keSred, 2);
-            Gt = Math.sqrt(1 - (1 / i)) * Gt + (gt - keDispersia) / (Math.sqrt(2 * i) * keDispersia);
+            if(i>3) {
+                double gt = Math.pow(xn - keSred, 2);
+                Gt = Math.sqrt(1 - (1 / i)) * Gt + (gt - keDispersia) / (Math.sqrt(2 * i) * keDispersia);
+            }
         }
-        if (Gt > 2.5) return true;
+        System.out.println("Gt= " + Gt);
+        if (Math.abs(Gt) > 2.0) return true;
         return false;
     }
 
